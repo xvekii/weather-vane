@@ -6,9 +6,14 @@ const URL = 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/s
 // Implement location variable inside link, otherwise default Shanghai
 // Return data 
 async function getWeather() {
-  const response = await fetch(URL);
-  const weatherData = await response.json();
-  console.log(weatherData);
+  try {
+    const response = await fetch(URL);
+    const weatherData = await response.json();
+    console.log(weatherData);
+  } catch (err) {
+    // Add N/A
+    console.log(err);
+  }
 }
 
 getWeather();
