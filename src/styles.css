@@ -32,6 +32,9 @@ html {
   --spc-3: 0.75rem;  
   --spc-4: 1rem;     
   --spc-5: 1.5rem;   
+  --spc-6: 1.75rem;   
+  --spc-7: 2rem;   
+  --spc-8: 3rem;   
 
   /* Colors */
   /* Body, cards */
@@ -54,10 +57,11 @@ html {
   --width-sm-card: 6rem;
 
   /* Header */
-  --width-perc-90: 90%;
+  --width-90-pc: 90%;
 
   /* Border-radius */
   --radius-20: 20px;
+  --radius-50-pc: 50%;
 }
 
 body {
@@ -70,7 +74,7 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: var(--width-perc-90);
+  width: var(--width-90-pc);
 }
 
 .settings-div {
@@ -85,6 +89,7 @@ header {
   display: flex; 
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 #query {
@@ -93,4 +98,26 @@ header {
   border: none;
   padding: .6rem 2rem;
   background: var(--clr-muted-bg-light);
+}
+
+.loader {
+  display: none; 
+  position: absolute;
+  right: var(--spc-8);
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: var(--radius-50-pc);
+  border: 3px solid transparent;
+  border-top-color: var(--clr-bg-dark);
+  animation: rotate .6s linear infinite;
+}
+
+.loader.is-visible {
+  display: block;
+}
+
+@keyframes rotate {
+  100% {
+    rotate: 360deg;
+  }
 }

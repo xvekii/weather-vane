@@ -6,13 +6,16 @@
   <title>WeatherVane</title>
 </head>
 <body>
-  <div class="wrapper">
-    <header>
-      <form id="searchForm">
-        <input id="query" name="q" type="search" placeholder="" maxlength="50" size="50">
-        <button type="submit">Search</button>
-      </form>
-    </header>
-  </div>
+  <header>
+    <div class="settings-div">
+
+    </div>
+  </header>
+  <main class="main-wrapper">
+    <form id="searchForm">
+      <input id="query" name="q" type="search" placeholder="" maxlength="50" size="50">
+      <div class="loader" role="status" aria-live="polite" aria-label="Loading"></div>
+    </form>
+  </main>
 </body>
 </html>
