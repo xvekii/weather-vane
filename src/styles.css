@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -65,6 +81,8 @@ html {
 }
 
 body {
+  font-family: Inter, monospace, ui-sans-serif, system-ui, sans-serif;
+  margin: 0;
   display: grid;
   place-items: center;
   grid-template-rows: 2.5rem 1fr 2.5rem;
@@ -96,14 +114,15 @@ header {
   font-size: var(--fs-base);
   border-radius: var(--radius-20);
   border: none;
-  padding: .6rem 2rem;
+  padding: .6rem 3rem;
   background: var(--clr-muted-bg-light);
+  width: 100%;
 }
 
 .loader {
   display: none; 
   position: absolute;
-  right: var(--spc-8);
+  right: var(--spc-3);
   height: 1.3rem;
   width: 1.3rem;
   border-radius: var(--radius-50-pc);
@@ -114,6 +133,31 @@ header {
 
 .loader.is-visible {
   display: block;
+}
+
+.location {
+  display: grid;
+  position: absolute;
+  left: .5rem;
+  top: 3rem;
+  width: 90%;
+  background: var(--clr-bg-light);
+  color: var(--clr-bg-dark);
+  box-shadow: 0px 0px 3px 3px #00000021;
+  border-radius: 4px;
+  padding: 1rem;
+  word-wrap: break-word;
+  max-height: 20rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.loc-span {
+  padding: .8rem;
+  margin: .3rem .2rem;
+  color: var(--clr-bg-dark);
+  border: 1px dotted #0000004a;
+  border-radius: 2px;
 }
 
 @keyframes rotate {
