@@ -10,30 +10,87 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  /* Base font size */
+  --fs-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+
+/* Type scale */
+  --fs-sm: clamp(0.875rem, 0.82rem + 0.25vw, 0.95rem);
+  --fs-md: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
+  --fs-lg: clamp(1.4rem, 1.25rem + 0.6vw, 1.75rem);
+  --fs-xl: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+  --fs-2xl: clamp(2.25rem, 1.9rem + 1.5vw, 3rem);
+
+  /* Line heights */
+  --lh-tight: 1.2;
+  --lh-normal: 1.5;
+  --lh-loose: 1.75;
+
+  /* Spacing (4px scale)*/
+  --spc-1: 0.25rem;
+  --spc-2: 0.5rem;   
+  --spc-3: 0.75rem;  
+  --spc-4: 1rem;     
+  --spc-5: 1.5rem;   
+
+  /* Colors */
+  /* Body, cards */
+  --clr-bg-light: #FFFFFF;
+  --clr-bg-dark: #0A0B0BE3;
+  --clr-muted-bg-light: #d9d9d95b;
+  --clr-muted-bg-dark: #CDCDCD70;
+
+  /* Main wrapper width */
+  --width-main-wrapper: 36rem;
+
+  /* Text */
+  --clr-txt-light: #FFFFFF;
+  --clr-txt-dark: #000000;
+  --clr-txt-muted: #000000a8;
+
+  /* Width */
+  /* Cards */
+  --width-lg-card: 18rem;
+  --width-sm-card: 6rem;
+
+  /* Header */
+  --width-perc-90: 90%;
+
+  /* Border-radius */
+  --radius-20: 20px;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  grid-template-rows: 2.5rem 1fr 2.5rem;
+}
+
 header {
-  
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: var(--width-perc-90);
 }
 
-.wrapper {
-  margin-top: 1.5rem;
-  
+.settings-div {
+  background: purple;
 }
 
-#searchForm, 
-.wrapper {
+.main-wrapper {
+  width: var(--width-main-wrapper);
+}
+
+#searchForm {
   display: flex; 
   justify-content: center;
   align-items: center;
 }
 
-#searchForm {
-  gap: .4rem;
-}
-
 #query {
-  font-size: 1rem;
-  padding: .6rem 2rem;
-  border-radius: 20px;
+  font-size: var(--fs-base);
+  border-radius: var(--radius-20);
   border: none;
-  background: #80808021;
+  padding: .6rem 2rem;
+  background: var(--clr-muted-bg-light);
 }
