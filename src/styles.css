@@ -74,6 +74,7 @@ html {
 
   /* Header */
   --width-90-pc: 90%;
+  --width-100-pc: 100%;
 
   /* Border-radius */
   --radius-20: 20px;
@@ -116,7 +117,7 @@ header {
   border: none;
   padding: .6rem 3rem;
   background: var(--clr-muted-bg-light);
-  width: 100%;
+  width: var(--width-100-pc);
 }
 
 .loader {
@@ -138,14 +139,13 @@ header {
 .location {
   display: grid;
   position: absolute;
-  left: .5rem;
-  top: 3rem;
-  width: 90%;
+  top: var(--spc-8);
+  width: var(--width-100-pc);
   background: var(--clr-bg-light);
   color: var(--clr-bg-dark);
-  box-shadow: 0px 0px 3px 3px #00000021;
+  box-shadow: 0px 0px 2px 2px #00000021;
   border-radius: 4px;
-  padding: 1rem;
+  padding: var(--spc-2);
   word-wrap: break-word;
   max-height: 20rem;
   overflow-y: auto;
@@ -153,10 +153,10 @@ header {
 }
 
 .loc-span {
-  padding: .8rem;
-  margin: .3rem .2rem;
+  padding: var(--spc-3);
+  margin: 0 .2rem;
   color: var(--clr-bg-dark);
-  border: 1px dotted #0000004a;
+
   border-radius: 2px;
 }
 
