@@ -83,10 +83,14 @@ html {
 
 body {
   font-family: Inter, monospace, ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--clr-bg-light);
+  font-size: var(--fs-base);
   margin: 0;
   display: grid;
   place-items: center;
   grid-template-rows: 2.5rem 1fr 2.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 header {
@@ -154,10 +158,13 @@ header {
 
 .loc-span {
   padding: var(--spc-3);
-  margin: 0 .2rem;
   color: var(--clr-bg-dark);
-
   border-radius: 2px;
+  cursor: pointer;
+}
+
+.loc-span:hover {
+  background-color: var(--clr-muted-bg-light);
 }
 
 @keyframes rotate {
