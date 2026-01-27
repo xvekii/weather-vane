@@ -5,6 +5,9 @@ const input = document.querySelector("#query");
 const loader = form.querySelector(".loader");
 const locationsDiv = document.createElement("div");
 
+const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
+const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
+
 function showLoader() {
   loader.classList.add("is-visible");
 }
@@ -14,18 +17,6 @@ function hideLoader() {
 }
 
 // Add one function show?
-
-const apiKey = "H9CXBS2KVNGA3AW4L8PF8PGK4";
-const locAPIKey = "bd15706d81c640a398a191135262501";
-
-//  Use DevTools to simulate network speeds with loader
-
-// Default URL
-const defaultURL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/shanghai?unitGroup=metric&elements=add%3Atimezone%2Cadd%3Atzoffset%2Cremove%3Acloudcover%2Cremove%3Amoonphase%2Cremove%3Apressure%2Cremove%3Astations&include=days%2Chours%2Ccurrent%2Calerts%2Cevents&key=${apiKey}&contentType=json`;
-
-// Add const loc = encodeURIComponent(location);
-// Implement location variable inside link, otherwise default Shanghai
-// Return data 
 
 input.addEventListener("input", () => {
   if (!input.value.trim()) {
@@ -41,7 +32,7 @@ input.addEventListener("input", () => {
 
 async function searchLocations(query) {
   try {
-    const res = await fetch(`http://api.weatherapi.com/v1/search.json?key=${locAPIKey}&q=${encodeURIComponent(query)}`);
+    const res = await fetch(`http://api.weatherapi.com/v1/search.json?key=${LOCATION_API_KEY}&q=${encodeURIComponent(query)}`);
     const locations = await res.json();
 
     showLocations(locations);
@@ -95,11 +86,16 @@ async function getWeather(loc) {
   try {
     showLoader();
     const encodedLoc = encodeURIComponent(loc);
-    const URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedLoc}?unitGroup=metric&elements=add%3Aaddress%2Cadd%3Alatitude%2Cadd%3Alongitude%2Cadd%3AresolvedAddress%2Cadd%3Atimezone%2Cadd%3Atzoffset%2Cremove%3Acloudcover%2Cremove%3Adew%2Cremove%3Afeelslikemax%2Cremove%3Afeelslikemin%2Cremove%3Amoonphase%2Cremove%3Aprecipcover%2Cremove%3Apressure%2Cremove%3Asevererisk%2Cremove%3Asnow%2Cremove%3Asnowdepth%2Cremove%3Asolarenergy%2Cremove%3Asolarradiation%2Cremove%3Astations%2Cremove%3Auvindex%2Cremove%3Avisibility%2Cremove%3Awinddir%2Cremove%3Awindgust&include=days%2Chours%2Ccurrent%2Calerts%2Cevents&key=${apiKey}&contentType=json`;
+    const URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedLoc}?unitGroup=metric&elements=add%3Aaddress%2Cadd%3Alatitude%2Cadd%3Alongitude%2Cadd%3AresolvedAddress%2Cadd%3Atimezone%2Cadd%3Atzoffset%2Cremove%3Acloudcover%2Cremove%3Adew%2Cremove%3Afeelslikemax%2Cremove%3Afeelslikemin%2Cremove%3Amoonphase%2Cremove%3Aprecipcover%2Cremove%3Apressure%2Cremove%3Asevererisk%2Cremove%3Asnow%2Cremove%3Asnowdepth%2Cremove%3Asolarenergy%2Cremove%3Asolarradiation%2Cremove%3Astations%2Cremove%3Auvindex%2Cremove%3Avisibility%2Cremove%3Awinddir%2Cremove%3Awindgust&include=days%2Chours%2Ccurrent%2Calerts%2Cevents&key=${WEATHER_API_KEY}&contentType=json`;
     const response = await fetch(URL);
+    if (!response.ok) {
+      hideLoader();
+      throw new Error(`Response status: ${response.status}`);
+    }
+
     const weatherData = await response.json();
     console.log(weatherData);
-    console.log(weatherData.address);
+    input.value = weatherData.address;
     // Add fn that takes in data and hydrates fields
     hideLoader();
   } catch (err) {
@@ -108,3 +104,5 @@ async function getWeather(loc) {
     console.log(err);
   }
 }
+
+getWeather("Shanghai, China");
