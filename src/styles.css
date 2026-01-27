@@ -59,9 +59,6 @@ html {
   --clr-muted-bg-light: #d9d9d95b;
   --clr-muted-bg-dark: #CDCDCD70;
 
-  /* Main wrapper width */
-  --width-main-wrapper: 36rem;
-
   /* Text */
   --clr-txt-light: #FFFFFF;
   --clr-txt-dark: #000000;
@@ -102,26 +99,6 @@ header {
 
 .settings-div {
   background: purple;
-}
-
-.main-wrapper {
-  width: var(--width-main-wrapper);
-}
-
-#searchForm {
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-#query {
-  font-size: var(--fs-base);
-  border-radius: var(--radius-20);
-  border: none;
-  padding: .6rem 3rem;
-  background: var(--clr-muted-bg-light);
-  width: var(--width-100-pc);
 }
 
 .loader {
@@ -167,8 +144,105 @@ header {
   background-color: var(--clr-muted-bg-light);
 }
 
+#query {
+  font-size: var(--fs-base);
+  border-radius: var(--radius-20);
+  border: none;
+  padding: .6rem 3rem;
+  background: var(--clr-muted-bg-light);
+  width: var(--width-100-pc);
+}
+
+#searchForm {
+  grid-area: search;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* margin-bottom: var(--spc-4); */
+}
+
+.main-wrapper {
+  width: 25rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 4rem 12rem 20rem;
+  grid-template-areas:
+    "search search"
+    "main secondary"
+    "hourly daily";
+  gap: var(--spc-2);
+}
+
+.main-card {
+  grid-area: main;
+  background: var(--clr-muted-bg-light);
+  border-radius: var(--radius-20);
+  padding: var(--spc-5);
+}
+
+.secondary-card {
+  grid-area: secondary;
+  background: var(--clr-muted-bg-light);
+  border-radius: var(--radius-20);
+  padding: var(--spc-5);
+}
+
+.hourly-card {
+  grid-area: hourly;
+  background: var(--clr-muted-bg-light);
+  border-radius: var(--radius-20);
+  padding: var(--spc-5);
+}
+
+.daily-card {
+  grid-area: daily;
+  background: var(--clr-muted-bg-light);
+  border-radius: var(--radius-20);
+  padding: var(--spc-5);
+}
+
 @keyframes rotate {
   100% {
     rotate: 360deg;
+  }
+}
+
+@media (max-width: 500px) {
+  .main-wrapper {
+    width: 75%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3rem 10rem 10rem 20rem 20rem;
+    grid-template-areas:
+      "search"
+      "main"
+      "secondary"
+      "hourly"
+      "daily";
+    gap: var(--spc-2);
+  }
+}
+
+@media (min-width: 501px) {
+  .main-wrapper {
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 501px) {
+  .main-wrapper {
+    width: 70%;
+  }
+}
+
+@media (min-width: 900px) {
+  .main-wrapper {
+    width: 75%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .main-wrapper {
+    width: 45rem;
   }
 }
