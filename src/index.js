@@ -1,9 +1,14 @@
 import "./styles.css";
+import { 
+  partlyCloudyDay,
+  clearNight,
+ } from "./icons.js";
 
 const form = document.querySelector("#searchForm");
 const input = document.querySelector("#query");
 const loader = form.querySelector(".loader");
 const locationsDiv = document.createElement("div");
+const mainCard = document.querySelector(".main-card");
 
 const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
 const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
@@ -97,6 +102,12 @@ async function getWeather(loc) {
     console.log(weatherData);
     input.value = weatherData.address;
     // Add fn that takes in data and hydrates fields
+    if (weatherData.currentConditions.icon === "partly-cloudy-night") {
+      const img = document.createElement("img");
+      img.src = clearNight;
+      mainCard.appendChild(img);
+
+    }
     hideLoader();
   } catch (err) {
     // Add N/A
