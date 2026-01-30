@@ -51,6 +51,7 @@ html {
   --spc-6: 1.75rem;   
   --spc-7: 2rem;   
   --spc-8: 3rem;   
+  --spc-9: 4rem;   
 
   /* Colors */
   /* Body, cards */
@@ -120,7 +121,7 @@ header {
 .location {
   display: grid;
   position: absolute;
-  top: var(--spc-8);
+  top: var(--spc-9);
   width: var(--width-100-pc);
   background: var(--clr-bg-light);
   color: var(--clr-bg-dark);
@@ -159,7 +160,6 @@ header {
   justify-content: center;
   align-items: center;
   position: relative;
-  /* margin-bottom: var(--spc-4); */
 }
 
 .main-wrapper {
@@ -179,6 +179,22 @@ header {
   background: var(--clr-muted-bg-light);
   border-radius: var(--radius-20);
   padding: var(--spc-5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-inner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.main-inner-content-left, 
+.main-inner-content-right {
+  width: 50%;
+  border: 1px solid purple;
 }
 
 .secondary-card {
