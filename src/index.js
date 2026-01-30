@@ -7,6 +7,7 @@ const locationsDiv = document.createElement("div");
 const mainCard = document.querySelector(".main-card");
 const mainContentRight = document.querySelector(".main-inner-content-right");
 const mainWeatherIcon = document.querySelector(".main-weather-img");
+const mainWeatherTxt = document.querySelector(".main-weather-txt");
 
 const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
 const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
@@ -102,6 +103,8 @@ async function getWeather(loc) {
     input.value = weatherData.address;
     // Add fn that takes in data and hydrates fields
     // weatherData.currentConditions.conditions
+    setWeatherData(weatherData);
+
     const currentWeatherIcon = weatherData.currentConditions.icon;
     console.log(currentWeatherIcon);
     
@@ -117,6 +120,10 @@ async function getWeather(loc) {
     hideLoader();
     console.log(err);
   }
+}
+
+function setWeatherData(data) {
+  mainWeatherTxt.textContent = data.currentConditions.conditions;
 }
 
 function setWeatherIcon(iconName) {
