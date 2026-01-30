@@ -5,6 +5,8 @@ const input = document.querySelector("#query");
 const loader = form.querySelector(".loader");
 const locationsDiv = document.createElement("div");
 const mainCard = document.querySelector(".main-card");
+const mainContentRight = document.querySelector(".main-inner-content-right");
+const mainWeatherIcon = document.querySelector(".main-weather-img");
 
 const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
 const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
@@ -99,6 +101,7 @@ async function getWeather(loc) {
     console.log(weatherData);
     input.value = weatherData.address;
     // Add fn that takes in data and hydrates fields
+    // weatherData.currentConditions.conditions
     const currentWeatherIcon = weatherData.currentConditions.icon;
     console.log(currentWeatherIcon);
     
@@ -117,11 +120,10 @@ async function getWeather(loc) {
 }
 
 function setWeatherIcon(iconName) {
-  const weatherIcon = document.createElement("img");
   import(`./assets/images/${iconName}.svg`)
     .then((images) => {
-      weatherIcon.src = images.default;
-      mainCard.appendChild(weatherIcon);
+      mainWeatherIcon.src = images.default;
+      mainContentRight.appendChild(mainWeatherIcon);
     });
 }
 
