@@ -218,6 +218,28 @@ header {
   padding: var(--spc-5);
 }
 
+img {
+  width: 100%;
+}
+
+.main-inner-content-right {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spc-3);
+  
+}
+
+.main-weather-img {
+  width: 80%;
+}
+
+.main-weather-txt {
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
 @keyframes rotate {
   100% {
     rotate: 360deg;
