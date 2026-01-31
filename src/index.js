@@ -1,16 +1,23 @@
 import "./styles.css";
 
+const CELSIUS = "C";
+const FAHRENHEIT = "F";
+const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
+const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
+
 const form = document.querySelector("#searchForm");
 const input = document.querySelector("#query");
 const loader = form.querySelector(".loader");
 const locationsDiv = document.createElement("div");
+
 const mainCard = document.querySelector(".main-card");
+const mainContentLeft = document.querySelector(".main-inner-content-left");
+const mainTempNum = document.querySelector(".main-temp-num");
+const mainFeelsLike = document.querySelector(".main-feels-like");
+
 const mainContentRight = document.querySelector(".main-inner-content-right");
 const mainWeatherIcon = document.querySelector(".main-weather-img");
 const mainWeatherTxt = document.querySelector(".main-weather-txt");
-
-const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
-const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
 
 function showLoader() {
   loader.classList.add("is-visible");
@@ -123,7 +130,15 @@ async function getWeather(loc) {
 }
 
 function setWeatherData(data) {
+  const temp = data.currentConditions.temp;
+  const displayTemp = Math.round(temp);
+
+  const feelsLike = data.currentConditions.feelslike;
+  const displayFeelsLike = Math.round(feelsLike);
+
   mainWeatherTxt.textContent = data.currentConditions.conditions;
+  mainTempNum.textContent = `${displayTemp}`;
+  mainFeelsLike.textContent = `Feels like ${displayFeelsLike}°`;
 }
 
 function setWeatherIcon(iconName) {
