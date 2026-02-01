@@ -2,6 +2,9 @@ import "./styles.css";
 
 const CELSIUS = "C";
 const FAHRENHEIT = "F";
+const KMH = "km/h";
+const MPH = "m/h";
+
 const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
 const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
 
@@ -18,6 +21,11 @@ const mainFeelsLike = document.querySelector(".main-feels-like");
 const mainContentRight = document.querySelector(".main-inner-content-right");
 const mainWeatherIcon = document.querySelector(".main-weather-img");
 const mainWeatherTxt = document.querySelector(".main-weather-txt");
+
+const humidityVal = document.querySelector(".humidity-val");
+const windspeedVal = document.querySelector(".windspeed-val");
+const sunriseVal = document.querySelector(".sunrise-val");
+const sunsetVal = document.querySelector(".sunset-val");
 
 function showLoader() {
   loader.classList.add("is-visible");
@@ -129,6 +137,12 @@ async function getWeather(loc) {
 function setWeatherData(data) {
   const temp = data.currentConditions.temp;
   const displayTemp = Math.round(temp);
+  const humidity = data.currentConditions.humidity;
+  const windSpeed = data.currentConditions.windspeed;
+  const sunriseTime = data.currentConditions.sunrise;
+  const sunrise = sunriseTime.slice(0, 5);
+  const sunsetTime = data.currentConditions.sunset;
+  const sunset = sunsetTime.slice(0, 5);
 
   input.value = data.address;
 
@@ -141,10 +155,10 @@ function setWeatherData(data) {
   mainFeelsLike.textContent = `Feels like ${displayFeelsLike}°`;
 
   // Secondary card
-  // data.currentConditions.humidity
-  // data.currentConditions.windspeed
-  // data.currentConditions.sunrise
-  // data.currentConditions.sunset
+  humidityVal.textContent = `${humidity}%`;
+  windspeedVal.textContent = `${windSpeed} ${KMH}`;
+  sunriseVal.textContent = sunrise;
+  sunsetVal.textContent = sunset;
 
   // Hourly card - 0-23 hrs
   // data.days[0].hours[0].datetime
