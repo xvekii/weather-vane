@@ -31,6 +31,7 @@ html {
   --fs-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
 
 /* Type scale */
+  --fs-xs: clamp(0.75rem, 0.70rem + 0.2vw, 0.875rem);
   --fs-sm: clamp(0.875rem, 0.82rem + 0.25vw, 0.95rem);
   --fs-md: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
   --fs-lg: clamp(1.4rem, 1.25rem + 0.6vw, 1.75rem);
@@ -66,7 +67,7 @@ html {
   /* Text */
   --clr-txt-light: #FFFFFF;
   --clr-txt-dark: #000000;
-  --clr-txt-muted: #000000a8;
+  --clr-txt-muted: #080808b0;
 
   /* Width */
   /* Cards */
@@ -78,6 +79,7 @@ html {
   --width-100-pc: 100%;
 
   /* Border-radius */
+  --radius-18: 18px;
   --radius-20: 20px;
   --radius-50-pc: 50%;
 }
@@ -171,10 +173,10 @@ header {
 }
 
 .main-wrapper {
-  width: 25rem;
+  min-width: 55rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 4rem 12rem 20rem;
+  grid-template-rows: 4rem 14rem 20rem;
   grid-template-areas:
     "search search"
     "main secondary"
@@ -186,7 +188,7 @@ header {
   grid-area: main;
   background: var(--clr-muted-bg-light);
   border-radius: var(--radius-20);
-  padding: var(--spc-3);
+  padding: var(--spc-2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -251,10 +253,48 @@ header {
 
 .secondary-card {
   grid-area: secondary;
-  background: var(--clr-muted-bg-light);
+  background: var(--clr-bg-light);
   border-radius: var(--radius-20);
-  padding: var(--spc-5);
 }
+
+.second-card-upper-wrap {
+  display: flex;
+  gap: var(--spc-2);
+}
+
+.txt-bold-sm {
+  font-size: var(--fs-sm);
+  font-weight: bold;
+  margin-bottom: var(--spc-1);
+}
+
+.txt-reg-xs {
+  font-size: var(--fs-xs);
+  font-weight: normal;
+  margin-bottom: var(--spc-2);
+  color: var(--clr-txt-muted);
+}
+
+.humidity,
+.windspeed {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--clr-muted-bg-light);
+  border-radius: var(--radius-18);
+  padding: var(--spc-2);
+}
+
+.txt-bold-sm, 
+.txt-reg-xs {
+  
+}
+
+
+  
+
 
 .hourly-card {
   grid-area: hourly;
