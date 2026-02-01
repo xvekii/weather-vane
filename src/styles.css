@@ -253,12 +253,16 @@ header {
 
 .secondary-card {
   grid-area: secondary;
+  display: grid;
+  gap: var(--spc-2);
+  grid-template-rows: 1fr 1fr;
   background: var(--clr-bg-light);
   border-radius: var(--radius-20);
 }
 
 .second-card-upper-wrap {
-  display: flex;
+  display: grid;
+  grid-template-columns: 7rem 7.5rem 2fr;
   gap: var(--spc-2);
 }
 
@@ -273,26 +277,42 @@ header {
   font-weight: normal;
   margin-bottom: var(--spc-2);
   color: var(--clr-txt-muted);
+  min-height: 1rem;
 }
 
 .humidity,
 .windspeed {
-  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: var(--clr-muted-bg-light);
-  border-radius: var(--radius-18);
+  border-radius: var(--radius-20);
   padding: var(--spc-2);
 }
 
-.txt-bold-sm, 
-.txt-reg-xs {
-  
+.second-card-bottom-wrap {
+  background: var(--clr-muted-bg-light);
+  border-radius: var(--radius-20);
+  padding: var(--spc-2);
 }
 
+.sunrise-sunset {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--clr-muted-bg-light);
+  border-radius: var(--radius-20);
+  padding: var(--spc-2);
+}
 
+.sunrise-inner-wrap,
+.sunset-inner-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
   
 
 
