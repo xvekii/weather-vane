@@ -107,9 +107,6 @@ async function getWeather(loc) {
 
     const weatherData = await response.json();
     console.log(weatherData);
-    input.value = weatherData.address;
-    // Add fn that takes in data and hydrates fields
-    // weatherData.currentConditions.conditions
     setWeatherData(weatherData);
 
     const currentWeatherIcon = weatherData.currentConditions.icon;
@@ -133,12 +130,36 @@ function setWeatherData(data) {
   const temp = data.currentConditions.temp;
   const displayTemp = Math.round(temp);
 
+  input.value = data.address;
+
+  // Main card
   const feelsLike = data.currentConditions.feelslike;
   const displayFeelsLike = Math.round(feelsLike);
 
   mainWeatherTxt.textContent = data.currentConditions.conditions;
-  mainTempNum.textContent = `${displayTemp}`;
+  mainTempNum.textContent = `${displayTemp}°`;
   mainFeelsLike.textContent = `Feels like ${displayFeelsLike}°`;
+
+  // Secondary card
+  // data.currentConditions.humidity
+  // data.currentConditions.windspeed
+  // data.currentConditions.sunrise
+  // data.currentConditions.sunset
+
+  // Hourly card - 0-23 hrs
+  // data.days[0].hours[0].datetime
+  // data.days[0].hours[0].icon
+  // data.days[0].hours[0].precipprob
+  // data.days[0].hours[0].tempmin
+  // data.days[0].hours[0].tempmax
+  
+  // Daily card - 0-14 days
+  // data.days[0].datetime
+  // data.days[0].icon
+  // data.days[0].precipprob
+  // data.days[0].tempmin
+  // data.days[0].tempmax
+
 }
 
 function setWeatherIcon(iconName) {
