@@ -29,6 +29,18 @@ const sunsetVal = document.querySelector(".sunset-val");
 
 const severeAlertsTxt = document.querySelector(".severe-alerts-txt");
 
+const hourlyTitle = document.querySelector(".hourly-title");
+const hourly = document.querySelector(".hourly");
+
+const hours = document.querySelector(".hours");
+const hourlyIcons = document.querySelector(".hourly-icons");
+const hourlyTemp = document.querySelector(".hourly-temp");
+const hourlyTempMin = document.querySelector(".hourly-temp-min");
+const hourlyTempMax = document.querySelector(".hourly-temp-max");
+const hourlyPrecip = document.querySelector(".hourly-precip");
+
+
+
 function showLoader() {
   loader.classList.add("is-visible");
 }
@@ -148,6 +160,9 @@ function setWeatherData(data) {
   const noAlerts = "There are no alerts issued at this time.";
   const alerts = data.alerts.length !== 0 ? data.alerts[0].description : noAlerts;
 
+  const fullTime = data.days[0].hours[0].datetime;
+  const time = fullTime.slice(0, 5);
+
   input.value = data.address;
 
   // Main card
@@ -166,9 +181,32 @@ function setWeatherData(data) {
   severeAlertsTxt.textContent = alerts;
 
   // Hourly card - 0-23 hrs
-  // data.days[0].hours[0].datetime
+  hours.textContent = time;
+  // Get current datetime str
+  const currentHrFull = data.currentConditions.datetime;
+  const currentHrNum = Number(currentHrFull.slice(0, 2));
+  console.log(currentHrNum);
+
+
+  // Go through hrs array and start filling in from 1+ hr from that
+  // data.days[0].hours.forEach(hr => {
+  //   const hrInDay = hr.datetime;
+  //   const hrInDayNum = Number(hrInDay.slice(0, 2));
+  //   if (hrInDayNum > currentHrNum) {
+  //     console.log(hrInDay);
+  //   }
+  // });
+
+  data.days[0].hours.forEach(hr => {
+    const hrInDay = hr.datetime;
+    const hrInDayNum = Number(hrInDay.slice(0, 2));
+    console.log(hrInDay);
+  
+  });
+
+
   // data.days[0].hours[0].icon
-  // data.days[0].hours[0].precipprob
+  // data.days[0].hours[0].precip
   // data.days[0].hours[0].tempmin
   // data.days[0].hours[0].tempmax
   
@@ -189,4 +227,4 @@ function setWeatherIcon(iconName) {
     });
 }
 
-getWeather("Shanghai, China");
+getWeather("Đurđevac, Croácia");
