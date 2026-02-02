@@ -345,12 +345,18 @@ header {
 }
   
 
-
 .hourly-card {
   grid-area: hourly;
   background: var(--clr-muted-bg-light);
   border-radius: var(--radius-20);
   padding: var(--spc-5);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid purple;
 }
 
 .daily-card {
