@@ -27,6 +27,8 @@ const windspeedVal = document.querySelector(".windspeed-val");
 const sunriseVal = document.querySelector(".sunrise-val");
 const sunsetVal = document.querySelector(".sunset-val");
 
+const severeAlertsTxt = document.querySelector(".severe-alerts-txt");
+
 function showLoader() {
   loader.classList.add("is-visible");
 }
@@ -143,6 +145,8 @@ function setWeatherData(data) {
   const sunrise = sunriseTime.slice(0, 5);
   const sunsetTime = data.currentConditions.sunset;
   const sunset = sunsetTime.slice(0, 5);
+  const noAlerts = "There are no alerts issued at this time.";
+  const alerts = data.alerts.length !== 0 ? data.alerts[0].description : noAlerts;
 
   input.value = data.address;
 
@@ -159,6 +163,7 @@ function setWeatherData(data) {
   windspeedVal.textContent = `${windSpeed} ${KMH}`;
   sunriseVal.textContent = sunrise;
   sunsetVal.textContent = sunset;
+  severeAlertsTxt.textContent = alerts;
 
   // Hourly card - 0-23 hrs
   // data.days[0].hours[0].datetime
