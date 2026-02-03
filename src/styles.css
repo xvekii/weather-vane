@@ -359,6 +359,23 @@ header {
   border: 1px solid purple;
 }
 
+/* .hours {
+}
+
+.hourly-icons {
+}
+
+.hourly-temp {
+}
+
+.hourly-temp-min {
+}
+
+.hourly-temp-max {
+}
+.hourly-precip {
+} */
+
 .daily-card {
   grid-area: daily;
   background: var(--clr-muted-bg-light);
