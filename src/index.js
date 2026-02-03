@@ -148,9 +148,19 @@ async function getWeather(loc) {
   }
 }
 
+// function fillMainCardWeather(data) {
+
+// }
+
 function setWeatherData(data) {
+  input.value = data.address;
+
+  // fillMainCardWeather({
+
+  // });
   const temp = data.currentConditions.temp;
   const displayTemp = Math.round(temp);
+
   const humidity = data.currentConditions.humidity;
   const windSpeed = data.currentConditions.windspeed;
   const sunriseTime = data.currentConditions.sunrise;
@@ -163,7 +173,6 @@ function setWeatherData(data) {
   const fullTime = data.days[0].hours[0].datetime;
   const time = fullTime.slice(0, 5);
 
-  input.value = data.address;
 
   // Main card
   const feelsLike = data.currentConditions.feelslike;
@@ -197,12 +206,12 @@ function setWeatherData(data) {
   //   }
   // });
 
-  data.days[0].hours.forEach(hr => {
-    const hrInDay = hr.datetime;
-    const hrInDayNum = Number(hrInDay.slice(0, 2));
-    console.log(hrInDay);
+  // data.days[0].hours.forEach(hr => {
+  //   const hrInDay = hr.datetime;
+  //   const hrInDayNum = Number(hrInDay.slice(0, 2));
+  //   console.log(hrInDay);
   
-  });
+  // });
 
 
   // data.days[0].hours[0].icon
@@ -218,6 +227,49 @@ function setWeatherData(data) {
   // data.days[0].tempmax
 
 }
+
+function createRow() {
+  // Create div wrapper, add class hourly row
+  const rowWrapper = document.createElement("div");
+  rowWrapper.classList.add("hourly-wrap", "row");
+
+  // Append to rowWrapper
+  const hours = document.createElement("span");
+  hours.classList.add("hours");
+
+  const hourlyIcon = document.createElement("img");
+  hours.classList.add("hourly-icon");
+  // Add spans, div with 2 spans and append it to rowWrapper
+
+  const hourlyTempWrapper = document.createElement("span");
+  hourlyTempWrapper.classList.add("hourly-temp-wrap");
+
+  const hourlyTempMin = document.createElement("span");
+  hours.classList.add("hourly-temp-min");
+
+  const hourlyTempMax = document.createElement("span");
+  hours.classList.add("hourly-temp-max");
+
+  const hourlyPrecipWrapper = document.createElement("span");
+  hours.classList.add("hourly-precip-wrap");
+
+  const hourlyPrecipIcon = document.createElement("span");
+  hours.classList.add("hourly-precip-icon");
+  
+  const hourlyPrecip = document.createElement("span");
+  hours.classList.add("hourly-precip");
+
+  hourlyPrecipWrapper.append(hourlyPrecipIcon, hourlyPrecip);
+  hourlyTempWrapper.append(hourlyTempMin, hourlyTempMax);
+  rowWrapper.append(hours, hourlyIcon, hourlyTempWrapper, hourlyPrecipWrapper);
+
+  return rowWrapper;
+  // removeChildren, Append rowWrapper to hourly-card-inner,
+}
+
+// function fillRowData() {
+    // fill in alt with weather icon name
+// }
 
 function setWeatherIcon(iconName) {
   import(`./assets/images/${iconName}.svg`)
