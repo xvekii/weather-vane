@@ -148,46 +148,65 @@ async function getWeather(loc) {
   }
 }
 
-// function fillMainCardWeather(data) {
+function fillSearchInput({ locationStr }) {
+  input.value = locationStr;
+}
 
-// }
-
-function setWeatherData(data) {
-  input.value = data.address;
-
-  // fillMainCardWeather({
-
-  // });
-  const temp = data.currentConditions.temp;
+function fillMainCardWeather({ temp, currConditions, feelsLike }) {
+  // Main temp
   const displayTemp = Math.round(temp);
-
-  const humidity = data.currentConditions.humidity;
-  const windSpeed = data.currentConditions.windspeed;
-  const sunriseTime = data.currentConditions.sunrise;
-  const sunrise = sunriseTime.slice(0, 5);
-  const sunsetTime = data.currentConditions.sunset;
-  const sunset = sunsetTime.slice(0, 5);
-  const noAlerts = "There are no alerts issued at this time.";
-  const alerts = data.alerts.length !== 0 ? data.alerts[0].description : noAlerts;
-
-  const fullTime = data.days[0].hours[0].datetime;
-  const time = fullTime.slice(0, 5);
-
-
-  // Main card
-  const feelsLike = data.currentConditions.feelslike;
-  const displayFeelsLike = Math.round(feelsLike);
-
-  mainWeatherTxt.textContent = data.currentConditions.conditions;
   mainTempNum.textContent = `${displayTemp}°`;
-  mainFeelsLike.textContent = `Feels like ${displayFeelsLike}°`;
 
-  // Secondary card
+  // Feels like
+  const feelsLikeRaw = feelsLike;
+  const feelsLikeRound = Math.round(feelsLikeRaw);
+  mainFeelsLike.textContent = `Feels like ${feelsLikeRound}°`;
+
+  // Current conditions
+  mainWeatherTxt.textContent = currConditions;
+}
+
+function fillSecondaryCardWeather({ 
+  humidity, 
+  windSpeed,
+  sunriseTime,
+  sunsetTime,
+  alertsArr,
+}) {
+  const noAlerts = "There are no alerts issued at this time.";
+  const sunrise = sunriseTime.slice(0, 5);
+  const sunset = sunsetTime.slice(0, 5);
+  
   humidityVal.textContent = `${humidity}%`;
   windspeedVal.textContent = `${windSpeed} ${KMH}`;
   sunriseVal.textContent = sunrise;
   sunsetVal.textContent = sunset;
+
+  const alerts = alertsArr.length !== 0 ? alertsArr[0].description : noAlerts;
   severeAlertsTxt.textContent = alerts;
+}
+
+
+function setWeatherData(data) {
+  fillSearchInput({ locationStr: data.address }); 
+
+  fillMainCardWeather({
+    temp: data.currentConditions.temp,
+    currConditions: data.currentConditions.conditions,
+    feelsLike: data.currentConditions.feelslike,
+  });
+
+  fillSecondaryCardWeather({ 
+    humidity: data.currentConditions.humidity,
+    windSpeed: data.currentConditions.windspeed,
+    sunriseTime: data.currentConditions.sunrise,
+    sunsetTime: data.currentConditions.sunset,
+    alertsArr: data.alerts,
+  });
+
+  const fullTime = data.days[0].hours[0].datetime;
+  const time = fullTime.slice(0, 5);
+
 
   // Hourly card - 0-23 hrs
   hours.textContent = time;
