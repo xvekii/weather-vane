@@ -1,4 +1,10 @@
 import "./styles.css";
+import { 
+  hideLoader,
+  showLoader,
+  fillSearchInput,
+  
+} from "./ui.js";
 
 const CELSIUS = "C";
 const FAHRENHEIT = "F";
@@ -10,7 +16,7 @@ const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
 
 const form = document.querySelector("#searchForm");
 const input = document.querySelector("#query");
-const loader = form.querySelector(".loader");
+const formLoader = form.querySelector(".loader");
 const locationsDiv = document.createElement("div");
 
 const mainCard = document.querySelector(".main-card");
@@ -39,15 +45,6 @@ const hourlyTempMin = document.querySelector(".hourly-temp-min");
 const hourlyTempMax = document.querySelector(".hourly-temp-max");
 const hourlyPrecip = document.querySelector(".hourly-precip");
 
-
-
-function showLoader() {
-  loader.classList.add("is-visible");
-}
-
-function hideLoader() {
-  loader.classList.remove("is-visible");
-}
 
 // Add one function show?
 
@@ -117,13 +114,13 @@ function hide(el, className) {
 
 async function getWeather(loc) {
   try {
-    showLoader();
+    showLoader(formLoader);
     const encodedLoc = encodeURIComponent(loc);
     const URL = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedLoc}?unitGroup=metric&elements=add%3Aaddress%2Cadd%3Alatitude%2Cadd%3Alongitude%2Cadd%3AresolvedAddress%2Cadd%3Atimezone%2Cadd%3Atzoffset%2Cremove%3Acloudcover%2Cremove%3Adew%2Cremove%3Afeelslikemax%2Cremove%3Afeelslikemin%2Cremove%3Amoonphase%2Cremove%3Aprecipcover%2Cremove%3Apressure%2Cremove%3Asevererisk%2Cremove%3Asnow%2Cremove%3Asnowdepth%2Cremove%3Asolarenergy%2Cremove%3Asolarradiation%2Cremove%3Astations%2Cremove%3Auvindex%2Cremove%3Avisibility%2Cremove%3Awinddir%2Cremove%3Awindgust&include=days%2Chours%2Ccurrent%2Calerts%2Cevents&key=${WEATHER_API_KEY}&contentType=json`;
     const response = await fetch(URL);
     
     if (!response.ok) {
-      hideLoader();
+      hideLoader(formLoader);
       throw new Error(`Response status: ${response.status}`);
     }
 
@@ -140,16 +137,12 @@ async function getWeather(loc) {
       // Add N/A
       console.log("Icon error");
     }
-    hideLoader();
+    hideLoader(formLoader);
   } catch (err) {
     // Add N/A
-    hideLoader();
+    hideLoader(formLoader);
     console.log(err);
   }
-}
-
-function fillSearchInput({ locationStr }) {
-  input.value = locationStr;
 }
 
 function fillMainCardWeather({ temp, currConditions, feelsLike }) {
@@ -188,7 +181,7 @@ function fillSecondaryCardWeather({
 
 
 function setWeatherData(data) {
-  fillSearchInput({ locationStr: data.address }); 
+  fillSearchInput({ locationStr: data.address }, input); 
 
   fillMainCardWeather({
     temp: data.currentConditions.temp,
