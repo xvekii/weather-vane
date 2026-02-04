@@ -3,13 +3,11 @@ import {
   hideLoader,
   showLoader,
   fillSearchInput,
+  fillMainCardWeather,
+  fillSecondaryCardWeather,
+
   
 } from "./ui.js";
-
-const CELSIUS = "C";
-const FAHRENHEIT = "F";
-const KMH = "km/h";
-const MPH = "m/h";
 
 const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
 const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
@@ -21,19 +19,9 @@ const locationsDiv = document.createElement("div");
 
 const mainCard = document.querySelector(".main-card");
 const mainContentLeft = document.querySelector(".main-inner-content-left");
-const mainTempNum = document.querySelector(".main-temp-num");
-const mainFeelsLike = document.querySelector(".main-feels-like");
 
 const mainContentRight = document.querySelector(".main-inner-content-right");
 const mainWeatherIcon = document.querySelector(".main-weather-img");
-const mainWeatherTxt = document.querySelector(".main-weather-txt");
-
-const humidityVal = document.querySelector(".humidity-val");
-const windspeedVal = document.querySelector(".windspeed-val");
-const sunriseVal = document.querySelector(".sunrise-val");
-const sunsetVal = document.querySelector(".sunset-val");
-
-const severeAlertsTxt = document.querySelector(".severe-alerts-txt");
 
 const hourlyTitle = document.querySelector(".hourly-title");
 const hourly = document.querySelector(".hourly");
@@ -145,39 +133,7 @@ async function getWeather(loc) {
   }
 }
 
-function fillMainCardWeather({ temp, currConditions, feelsLike }) {
-  // Main temp
-  const displayTemp = Math.round(temp);
-  mainTempNum.textContent = `${displayTemp}°`;
 
-  // Feels like
-  const feelsLikeRaw = feelsLike;
-  const feelsLikeRound = Math.round(feelsLikeRaw);
-  mainFeelsLike.textContent = `Feels like ${feelsLikeRound}°`;
-
-  // Current conditions
-  mainWeatherTxt.textContent = currConditions;
-}
-
-function fillSecondaryCardWeather({ 
-  humidity, 
-  windSpeed,
-  sunriseTime,
-  sunsetTime,
-  alertsArr,
-}) {
-  const noAlerts = "There are no alerts issued at this time.";
-  const sunrise = sunriseTime.slice(0, 5);
-  const sunset = sunsetTime.slice(0, 5);
-  
-  humidityVal.textContent = `${humidity}%`;
-  windspeedVal.textContent = `${windSpeed} ${KMH}`;
-  sunriseVal.textContent = sunrise;
-  sunsetVal.textContent = sunset;
-
-  const alerts = alertsArr.length !== 0 ? alertsArr[0].description : noAlerts;
-  severeAlertsTxt.textContent = alerts;
-}
 
 
 function setWeatherData(data) {
