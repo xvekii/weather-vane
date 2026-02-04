@@ -181,7 +181,7 @@ function fillSecondaryCardWeather({
 
 
 function setWeatherData(data) {
-  fillSearchInput({ locationStr: data.address }, input); 
+  fillSearchInput({ locationStr: data.address, input }); 
 
   fillMainCardWeather({
     temp: data.currentConditions.temp,
