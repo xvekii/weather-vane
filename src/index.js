@@ -52,7 +52,7 @@ async function searchLocations(query) {
     const res = await fetch(`http://api.weatherapi.com/v1/search.json?key=${LOCATION_API_KEY}&q=${encodeURIComponent(query)}`);
     const locations = await res.json();
 
-    showLocations(locations);
+    showLocations({ locations, locationsDiv, form });
     console.log(locations);
   } catch (err) {
     // Add N/A

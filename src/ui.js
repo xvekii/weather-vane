@@ -59,15 +59,15 @@ export function fillSecondaryCardWeather({
   severeAlertsTxt.textContent = alerts;
 }
 
-export function showLocations({ locs, locationsDiv, form }) {
+export function showLocations({ locations, locationsDiv, form }) {
   locationsDiv.replaceChildren();
   
-  if (locs.length === 0) {
+  if (locations.length === 0) {
     locationsDiv.classList.remove("location");
     return;
   }
 
-  locs.forEach(loc => {
+  locations.forEach(loc => {
     const span = document.createElement("span");
     span.textContent = `${loc.name}, ${loc.country}`;
     locationsDiv.appendChild(span);
