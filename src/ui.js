@@ -77,3 +77,19 @@ export function showLocations({ locs, locationsDiv, form }) {
   form.appendChild(locationsDiv);
   locationsDiv.classList.add("location");
 }
+
+export function setWeatherIcon(iconName) {
+  const mainContentRight = document.querySelector(".main-inner-content-right");
+  const mainWeatherIcon = document.querySelector(".main-weather-img");
+  
+  import(`./assets/images/${iconName}.svg`)
+    .then((images) => {
+      mainWeatherIcon.src = images.default;
+      mainContentRight.appendChild(mainWeatherIcon);
+    });
+}
+
+export function hide(el, className) {
+  el.replaceChildren();
+  el.classList.remove(className);
+}

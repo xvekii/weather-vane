@@ -1,12 +1,14 @@
 import "./styles.css";
 import { 
+  hide,
   hideLoader,
   showLoader,
   fillSearchInput,
   fillMainCardWeather,
   fillSecondaryCardWeather,
   showLocations,
-  
+  setWeatherIcon,
+
 } from "./ui.js";
 
 const WEATHER_API_KEY = "H9CXBS2KVNGA3AW4L8PF8PGK4";
@@ -19,9 +21,6 @@ const locationsDiv = document.createElement("div");
 
 const mainCard = document.querySelector(".main-card");
 const mainContentLeft = document.querySelector(".main-inner-content-left");
-
-const mainContentRight = document.querySelector(".main-inner-content-right");
-const mainWeatherIcon = document.querySelector(".main-weather-img");
 
 const hourlyTitle = document.querySelector(".hourly-title");
 const hourly = document.querySelector(".hourly");
@@ -74,12 +73,6 @@ locationsDiv.addEventListener("mousedown", (e) => {
   
   hide(locationsDiv, "location");
 });
-
-function hide(el, className) {
-  el.replaceChildren();
-  el.classList.remove(className);
-}
-
 
 async function getWeather(loc) {
   try {
@@ -218,12 +211,6 @@ function createRow() {
     // fill in alt with weather icon name
 // }
 
-function setWeatherIcon(iconName) {
-  import(`./assets/images/${iconName}.svg`)
-    .then((images) => {
-      mainWeatherIcon.src = images.default;
-      mainContentRight.appendChild(mainWeatherIcon);
-    });
-}
+
 
 getWeather("Đurđevac, Croácia");
