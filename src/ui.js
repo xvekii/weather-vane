@@ -58,3 +58,22 @@ export function fillSecondaryCardWeather({
   const alerts = alertsArr.length !== 0 ? alertsArr[0].description : noAlerts;
   severeAlertsTxt.textContent = alerts;
 }
+
+export function showLocations({ locs, locationsDiv, form }) {
+  locationsDiv.replaceChildren();
+  
+  if (locs.length === 0) {
+    locationsDiv.classList.remove("location");
+    return;
+  }
+
+  locs.forEach(loc => {
+    const span = document.createElement("span");
+    span.textContent = `${loc.name}, ${loc.country}`;
+    locationsDiv.appendChild(span);
+    span.classList.add("loc-span");
+  });
+  
+  form.appendChild(locationsDiv);
+  locationsDiv.classList.add("location");
+}

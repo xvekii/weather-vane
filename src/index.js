@@ -5,7 +5,7 @@ import {
   fillSearchInput,
   fillMainCardWeather,
   fillSecondaryCardWeather,
-
+  showLocations,
   
 } from "./ui.js";
 
@@ -61,25 +61,6 @@ async function searchLocations(query) {
   }
 }
 
-function showLocations(locs) {
-  locationsDiv.replaceChildren();
-  
-  if (locs.length === 0) {
-    locationsDiv.classList.remove("location");
-    return;
-  }
-
-  locs.forEach(loc => {
-    const span = document.createElement("span");
-    span.textContent = `${loc.name}, ${loc.country}`;
-    locationsDiv.appendChild(span);
-    span.classList.add("loc-span");
-  });
-  
-  form.appendChild(locationsDiv);
-  locationsDiv.classList.add("location");
-}
-
 // Get location value on click, pass to getWeather
 locationsDiv.addEventListener("mousedown", (e) => {
   const span = e.target.closest(".loc-span");
@@ -132,8 +113,6 @@ async function getWeather(loc) {
     console.log(err);
   }
 }
-
-
 
 
 function setWeatherData(data) {
