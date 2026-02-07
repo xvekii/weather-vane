@@ -1,3 +1,5 @@
+import { createDiv, createSpan, createImg } from "./elements.js";
+
 const CELSIUS = "C";
 const FAHRENHEIT = "F";
 const KMH = "km/h";
@@ -59,6 +61,88 @@ export function fillSecondaryCardWeather({
   severeAlertsTxt.textContent = alerts;
 }
 
+export function fillHourlyCardWeather({ data }) {
+const hourlyInnerContainer = document.querySelector(".hourly-card-inner-content");
+ hourlyInnerContainer.replaceChildren();
+  
+  for (let i = 0; i < 5; i++) {
+    const {
+      rowWrapper,
+      hours,
+      hourlyIconWrap,
+      hourlyIcon,
+      hourlyTempWrapper,
+      hourlyTempMin,
+      hourlyTempMax,
+      hourlyPrecipWrapper,
+      hourlyPrecipIcon,
+      hourlyPrecip,
+    } = createHourlyRow();
+
+    const fullTime = data.days[i].hours[i].datetime;
+    const time = fullTime.slice(0, 5);
+    const hrs = time;
+    
+    const icon = data.days[i].hours[i].icon;
+    const precip = data.days[i].hours[i].precip;
+    const tempMin = data.days[i].tempmin;
+    const tempMax = data.days[i].tempmax;
+    hours.textContent = hrs;
+
+    setWeatherIcon({ iconName: icon, iconRef: hourlyIcon, iconCont: hourlyIconWrap });
+    hourlyTempMin.textContent = `${Math.round(tempMin)}°`;
+    hourlyTempMax.textContent = `${Math.round(tempMax)}°`;
+    setWeatherIcon({ iconName: "precip", iconRef: hourlyPrecipIcon, iconCont: hourlyPrecipWrapper });
+    hourlyPrecip.textContent = `${Math.round(precip)}%`;
+
+    hourlyInnerContainer.append(rowWrapper);
+  }
+}
+
+function createHourlyRow() {
+  // Row wrapper
+  const rowWrapper = createDiv({ classes: ["hourly-wrap", "row"] });
+
+  // Hours
+  const hours = createSpan({ classes: ["hours"] });
+
+  const hourlyIconWrap = createSpan({
+    classes: ["hourly-icon-wrap"],
+  });
+
+  const hourlyIcon = createImg({
+    classes: ["hourly-icon"],
+  });
+
+  // Hourly temp
+  const hourlyTempWrapper = createSpan({ classes: ["hourly-temp-wrap"] });
+  const hourlyTempMin = createSpan({ classes: ["hourly-temp-min"] });
+  const hourlyTempMax = createSpan({ classes: ["hourly-temp-max"] });
+
+  // Hourly precip
+  const hourlyPrecipWrapper = createSpan({ classes: ["hourly-precip-wrap"] });
+  const hourlyPrecipIcon = createImg({ classes: ["hourly-precip-icon"] });
+  const hourlyPrecip = createSpan({ classes: ["hourly-precip"] });
+
+  hourlyIconWrap.append(hourlyIcon);
+  hourlyPrecipWrapper.append(hourlyPrecip);
+  hourlyTempWrapper.append(hourlyTempMin, hourlyTempMax);
+  rowWrapper.append(hours, hourlyIconWrap, hourlyTempWrapper, hourlyPrecipWrapper);
+
+  return { 
+    rowWrapper,
+    hours,
+    hourlyIconWrap,
+    hourlyIcon,
+    hourlyTempWrapper, 
+    hourlyTempMin,
+    hourlyTempMax,
+    hourlyPrecipWrapper,
+    hourlyPrecipIcon,
+    hourlyPrecip,
+    };
+}
+
 export function showLocations({ locations, locationsDiv, form }) {
   locationsDiv.replaceChildren();
   
@@ -78,14 +162,11 @@ export function showLocations({ locations, locationsDiv, form }) {
   locationsDiv.classList.add("location");
 }
 
-export function setWeatherIcon(iconName) {
-  const mainContentRight = document.querySelector(".main-inner-content-right");
-  const mainWeatherIcon = document.querySelector(".main-weather-img");
-  
+export function setWeatherIcon({ iconName, iconRef, iconCont }) {
   import(`./assets/images/${iconName}.svg`)
     .then((images) => {
-      mainWeatherIcon.src = images.default;
-      mainContentRight.appendChild(mainWeatherIcon);
+      iconRef.src = images.default;
+      iconCont.appendChild(iconRef);
     });
 }
 
