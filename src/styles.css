@@ -226,6 +226,7 @@ header {
 
 .main-weather-img {
   width: 65%;
+  object-fit: contain;
 }
 
 .main-weather-txt {
