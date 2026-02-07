@@ -38,6 +38,7 @@ const hourlyPrecip = document.querySelector(".hourly-precip");
 input.addEventListener("input", () => {
   if (!input.value.trim()) {
     hide(locationsDiv, "location");
+    return;
   }
   const query = input.value.trim();
   
