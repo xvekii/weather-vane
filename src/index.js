@@ -6,6 +6,7 @@ import {
   fillSearchInput,
   fillMainCardWeather,
   fillSecondaryCardWeather,
+  fillHourlyCardWeather,
   showLocations,
   setWeatherIcon,
 } from "./ui.js";
@@ -18,6 +19,9 @@ const locationsDiv = document.createElement("div");
 
 const mainCard = document.querySelector(".main-card");
 const mainContentLeft = document.querySelector(".main-inner-content-left");
+
+const mainContentRight = document.querySelector(".main-inner-content-right");
+const mainWeatherIcon = document.querySelector(".main-weather-img");
 
 const hourlyTitle = document.querySelector(".hourly-title");
 const hourly = document.querySelector(".hourly");
@@ -73,7 +77,7 @@ async function handleGetWeather(loc) {
     console.log(currentWeatherIcon);
     
     if (currentWeatherIcon) {
-      setWeatherIcon(currentWeatherIcon);
+      setWeatherIcon({ iconName: currentWeatherIcon, iconRef: mainWeatherIcon, iconCont: mainContentRight });
     } else {
       console.log("Icon error");
     }
@@ -101,17 +105,18 @@ function setWeatherData(data) {
     alertsArr: data.alerts,
   });
 
-  const fullTime = data.days[0].hours[0].datetime;
-  const time = fullTime.slice(0, 5);
+  
+  
+  fillHourlyCardWeather({ data });
+  
 
 
   // Hourly card - 0-23 hrs
-  hours.textContent = time;
-  // Get current datetime str
-  const currentHrFull = data.currentConditions.datetime;
-  const currentHrNum = Number(currentHrFull.slice(0, 2));
-  console.log(currentHrNum);
-
+  // hours.textContent = time;
+  // // Get current datetime str
+  // const currentHrFull = data.currentConditions.datetime;
+  // const currentHrNum = Number(currentHrFull.slice(0, 2));
+  // console.log(currentHrNum);
 
   // Go through hrs array and start filling in from 1+ hr from that
   // data.days[0].hours.forEach(hr => {
@@ -144,44 +149,9 @@ function setWeatherData(data) {
 
 }
 
-function createRow() {
-  // Create div wrapper, add class hourly row
-  const rowWrapper = document.createElement("div");
-  rowWrapper.classList.add("hourly-wrap", "row");
 
-  // Append to rowWrapper
-  const hours = document.createElement("span");
-  hours.classList.add("hours");
 
-  const hourlyIcon = document.createElement("img");
-  hours.classList.add("hourly-icon");
-  // Add spans, div with 2 spans and append it to rowWrapper
 
-  const hourlyTempWrapper = document.createElement("span");
-  hourlyTempWrapper.classList.add("hourly-temp-wrap");
-
-  const hourlyTempMin = document.createElement("span");
-  hours.classList.add("hourly-temp-min");
-
-  const hourlyTempMax = document.createElement("span");
-  hours.classList.add("hourly-temp-max");
-
-  const hourlyPrecipWrapper = document.createElement("span");
-  hours.classList.add("hourly-precip-wrap");
-
-  const hourlyPrecipIcon = document.createElement("span");
-  hours.classList.add("hourly-precip-icon");
-  
-  const hourlyPrecip = document.createElement("span");
-  hours.classList.add("hourly-precip");
-
-  hourlyPrecipWrapper.append(hourlyPrecipIcon, hourlyPrecip);
-  hourlyTempWrapper.append(hourlyTempMin, hourlyTempMax);
-  rowWrapper.append(hours, hourlyIcon, hourlyTempWrapper, hourlyPrecipWrapper);
-
-  return rowWrapper;
-  // removeChildren, Append rowWrapper to hourly-card-inner,
-}
 
 // function fillRowData() {
     // fill in alt with weather icon name
