@@ -65,39 +65,74 @@ export function fillHourlyCardWeather({ data }) {
 const hourlyInnerContainer = document.querySelector(".hourly-card-inner-content");
  hourlyInnerContainer.replaceChildren();
   
-  for (let i = 0; i < 5; i++) {
-    const {
-      rowWrapper,
-      hours,
-      hourlyIconWrap,
-      hourlyIcon,
-      hourlyTempWrapper,
-      hourlyTempMin,
-      hourlyTempMax,
-      hourlyPrecipWrapper,
-      hourlyPrecipIcon,
-      hourlyPrecip,
-    } = createHourlyRow();
+  const timeNowHr = data.currentConditions.datetime;
+  const timeSlicedHr = timeNowHr.slice(0, 2);
+  const currentHour = Number(timeSlicedHr) + 2;
 
-    const fullTime = data.days[i].hours[i].datetime;
-    const time = fullTime.slice(0, 5);
-    const hrs = time;
-    
-    const icon = data.days[i].hours[i].icon;
-    const precip = data.days[i].hours[i].precip;
-    const tempMin = data.days[i].tempmin;
-    const tempMax = data.days[i].tempmax;
-    hours.textContent = hrs;
+  let currDay = 0;
+  let nextDay = 1;
+  
+  let dayHrs = 24;
+  let currHr = currentHour;
+  let ttlHrs = 0;
 
-    setWeatherIcon({ iconName: icon, iconRef: hourlyIcon, iconCont: hourlyIconWrap });
-    hourlyTempMin.textContent = `${Math.round(tempMin)}°`;
-    hourlyTempMax.textContent = `${Math.round(tempMax)}°`;
-    setWeatherIcon({ iconName: "precip", iconRef: hourlyPrecipIcon, iconCont: hourlyPrecipWrapper });
-    hourlyPrecip.textContent = `${Math.round(precip)}%`;
+  for (currDay; currDay < nextDay; currDay++) {
+    for (currHr; currHr < dayHrs; currHr++) {
+      const {
+        rowWrapper,
+        hours,
+        hourlyIconWrap,
+        hourlyIcon,
+        hourlyTempWrapper,
+        hourlyTempMin,
+        hourlyTempMax,
+        hourlyPrecipWrapper,
+        hourlyPrecipIcon,
+        hourlyPrecip,
+      } = createHourlyRow();
 
-    hourlyInnerContainer.append(rowWrapper);
+      const fullTime = data.days[currDay].hours[currHr].datetime;
+      const time = fullTime.slice(0, 5);
+      const hrs = time;
+
+      // console.log(fullTime);
+      // console.log(data.days[currDay].datetime);
+      
+      const icon = data.days[currDay].hours[currHr].icon;
+      const precip = data.days[currDay].hours[currHr].precip;
+      const tempMin = data.days[currDay].tempmin;
+      const tempMax = data.days[currDay].tempmax;
+
+      hours.textContent = hrs;
+
+      setWeatherIcon({ iconName: icon, iconRef: hourlyIcon, iconCont: hourlyIconWrap });
+      hourlyTempMin.textContent = `${Math.round(tempMin)}°`;
+      hourlyTempMax.textContent = `${Math.round(tempMax)}°`;
+      setWeatherIcon({ iconName: "precip", iconRef: hourlyPrecipIcon, iconCont: hourlyPrecipWrapper });
+      hourlyPrecip.textContent = `${Math.round(precip)}%`;
+
+      hourlyInnerContainer.append(rowWrapper);
+      if (ttlHrs !== 24 ) ttlHrs++;
+    }
+    if (ttlHrs < dayHrs) {
+      // console.log(`ttlhrs: ${ttlHrs}`);
+      dayHrs = dayHrs - ttlHrs;
+      console.log(`dayHrsEnd: ${dayHrs}`);
+      nextDay = 2;
+      currHr = 0;
+      ttlHrs = 24;
+    }
   }
 }
+
+    // const fullTime = data.currentConditions.datetime;
+    // const time = fullTime.slice(0, 5);
+    // const currentHours = Number(time);
+    
+    // const icon = data.days[i].hours[i].icon;
+    // const precip = data.days[i].hours[i].precip;
+    // const tempMin = data.days[i].tempmin;
+    // const tempMax = data.days[i].tempmax;
 
 function createHourlyRow() {
   // Row wrapper
