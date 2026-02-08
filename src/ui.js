@@ -92,9 +92,6 @@ export function fillHourlyCardWeather({ data }) {
       const fullTime = data.days[currDay].hours[currHr].datetime;
       const time = fullTime.slice(0, 5);
       const hrs = time;
-
-      // console.log(fullTime);
-      // console.log(data.days[currDay].datetime);
       
       const icon = data.days[currDay].hours[currHr].icon;
       const precip = data.days[currDay].hours[currHr].precipprob;
@@ -111,7 +108,6 @@ export function fillHourlyCardWeather({ data }) {
       if (ttlHrs !== 24 ) ttlHrs++;
     }
     if (ttlHrs < dayHrs) {
-      // console.log(`ttlhrs: ${ttlHrs}`);
       dayHrs = dayHrs - ttlHrs;
       console.log(`dayHrsEnd: ${dayHrs}`);
       nextDay = 2;
@@ -156,13 +152,6 @@ export function fillDailyCardWeather({ data }) {
 
     dailyInnerContainer.append(rowWrapper);
   });
-  
-
-  // 
-  // day[idx].icon
-  // day[idx].precipprob
-  // day[idx].temp
-  // day[idx].tempmax
 }
 
 
