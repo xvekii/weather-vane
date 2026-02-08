@@ -7,6 +7,7 @@ import {
   fillMainCardWeather,
   fillSecondaryCardWeather,
   fillHourlyCardWeather,
+  fillDailyCardWeather,
   showLocations,
   setWeatherIcon,
 } from "./ui.js";
@@ -105,48 +106,8 @@ function setWeatherData(data) {
     alertsArr: data.alerts,
   });
 
-  
-  
   fillHourlyCardWeather({ data });
-  
-
-
-  // Hourly card - 0-23 hrs
-  // hours.textContent = time;
-  // // Get current datetime str
-  // const currentHrFull = data.currentConditions.datetime;
-  // const currentHrNum = Number(currentHrFull.slice(0, 2));
-  // console.log(currentHrNum);
-
-  // Go through hrs array and start filling in from 1+ hr from that
-  // data.days[0].hours.forEach(hr => {
-  //   const hrInDay = hr.datetime;
-  //   const hrInDayNum = Number(hrInDay.slice(0, 2));
-  //   if (hrInDayNum > currentHrNum) {
-  //     console.log(hrInDay);
-  //   }
-  // });
-
-  // data.days[0].hours.forEach(hr => {
-  //   const hrInDay = hr.datetime;
-  //   const hrInDayNum = Number(hrInDay.slice(0, 2));
-  //   console.log(hrInDay);
-  
-  // });
-
-
-  // data.days[0].hours[0].icon
-  // data.days[0].hours[0].precip
-  // data.days[0].hours[0].tempmin
-  // data.days[0].hours[0].tempmax
-  
-  // Daily card - 0-14 days
-  // data.days[0].datetime
-  // data.days[0].icon
-  // data.days[0].precipprob
-  // data.days[0].tempmin
-  // data.days[0].tempmax
-
+  fillDailyCardWeather({ data });
 }
 
 

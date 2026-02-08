@@ -380,38 +380,46 @@ header {
   font-variant-numeric: tabular-nums;
 }
 
-.hourly-icon-wrap {
+.hourly-icon-wrap,
+.daily-icon-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 1.8rem;
 }
 
-.hourly-icon {
+.hourly-icon,
+.daily-icon {
   width: 1.8rem;
 }
 
-.hourly-icon {
+.hourly-icon,
+.daily-icon {
   height: 1.8rem;
 }
 
 .hourly-temp,
-.hourly-precip-wrap {
+.daily-temp,
+.hourly-precip-wrap,
+.daily-precip-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
   font-variant-numeric: tabular-nums;
 }
 
-.hourly-precip-wrap {
+.hourly-precip-wrap,
+.daily-precip-wrap {
   flex-direction: row-reverse;
 }
 
-.hourly-precip {
+.hourly-precip,
+.daily-precip {
   width: 3rem;
 }
 
-.hourly-precip-icon {
+.hourly-precip-icon,
+.daily-precip-icon {
   width: 1.3rem;
 }
 

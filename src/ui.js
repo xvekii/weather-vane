@@ -62,8 +62,8 @@ export function fillSecondaryCardWeather({
 }
 
 export function fillHourlyCardWeather({ data }) {
-const hourlyInnerContainer = document.querySelector(".hourly-card-inner-content");
- hourlyInnerContainer.replaceChildren();
+  const hourlyInnerContainer = document.querySelector(".hourly-card-inner-content");
+  hourlyInnerContainer.replaceChildren();
   
   const timeNowHr = data.currentConditions.datetime;
   const timeSlicedHr = timeNowHr.slice(0, 2);
@@ -121,45 +121,50 @@ const hourlyInnerContainer = document.querySelector(".hourly-card-inner-content"
   }
 }
 
+export function fillDailyCardWeather({ data }) {
+  const dailyInnerContainer = document.querySelector(".daily-card-inner-content");
+  dailyInnerContainer.replaceChildren();
+  const options = {
+    weekday: "long",
+  };
+  
+  data.days.forEach((day) => {
+    const {
+      rowWrapper,
+      dayOfWeek,
+      dailyIconWrap,
+      dailyIcon, 
+      dailyTemp,
+      dailyPrecipWrapper,
+      dailyPrecipIcon,
+      dailyPrecip,
+    } = createDailyRow();
+    
+    const currDay = new Date(day.datetime);
+    const currDayName = currDay.toLocaleDateString(undefined, options);
+    console.log(day.datetime);
 
-function createDailyRow() {
-  // Row wrapper
-  const rowWrapper = createDiv({ classes: ["daily-wrap", "row"] });
+    const temp = day.temp;
+    const icon = day.icon;
+    const precip = day.precipprob;
+    
+    dayOfWeek.textContent = currDayName;
+    setWeatherIcon({ iconName: icon, iconRef: dailyIcon, iconCont: dailyIconWrap });
+    dailyTemp.textContent = `${Math.round(temp)}°`;
+    setWeatherIcon({ iconName: "precip", iconRef: dailyPrecipIcon, iconCont: dailyPrecipWrapper });
+    dailyPrecip.textContent = `${Math.round(precip)}%`;
 
-  // Hours
-  const days = createSpan({ classes: ["days"] });
-
-  const dailyIconWrap = createSpan({
-    classes: ["daily-icon-wrap"],
+    dailyInnerContainer.append(rowWrapper);
   });
+  
 
-  const dailyIcon = createImg({
-    classes: ["daily-icon"],
-  });
-
-  // Hourly temp
-  const dailyTemp = createSpan({ classes: ["daily-temp"] });
-
-  // Hourly precip
-  const dailyPrecipWrapper = createSpan({ classes: ["daily-precip-wrap"] });
-  const dailyPrecipIcon = createImg({ classes: ["daily-precip-icon"] });
-  const dailyPrecip = createSpan({ classes: ["daily-precip"] });
-
-  dailyIconWrap.append(hourlyIcon);
-  dailyPrecipWrapper.append(dailyPrecip);
-  rowWrapper.append(days, dailyIconWrap, dailyTemp, dailyPrecipWrapper);
-
-  return { 
-    rowWrapper,
-    days,
-    dailyIconWrap,
-    dailyIcon, 
-    dailyTemp,
-    dailyPrecipWrapper,
-    dailyPrecipIcon,
-    dailyPrecip,
-    };
+  // 
+  // day[idx].icon
+  // day[idx].precipprob
+  // day[idx].temp
+  // day[idx].tempmax
 }
+
 
 function createHourlyRow() {
   // Row wrapper
@@ -197,6 +202,45 @@ function createHourlyRow() {
     hourlyPrecipWrapper,
     hourlyPrecipIcon,
     hourlyPrecip,
+    };
+}
+
+function createDailyRow() {
+  // Row wrapper
+  const rowWrapper = createDiv({ classes: ["daily-wrap", "row"] });
+
+  // Days
+  const dayOfWeek = createSpan({ classes: ["dayOfWeek"] });
+
+  const dailyIconWrap = createSpan({
+    classes: ["daily-icon-wrap"],
+  });
+
+  const dailyIcon = createImg({
+    classes: ["daily-icon"],
+  });
+
+  // Hourly temp
+  const dailyTemp = createSpan({ classes: ["daily-temp"] });
+
+  // Hourly precip
+  const dailyPrecipWrapper = createSpan({ classes: ["daily-precip-wrap"] });
+  const dailyPrecipIcon = createImg({ classes: ["daily-precip-icon"] });
+  const dailyPrecip = createSpan({ classes: ["daily-precip"] });
+
+  dailyIconWrap.append(dailyIcon);
+  dailyPrecipWrapper.append(dailyPrecip);
+  rowWrapper.append(dayOfWeek, dailyIconWrap, dailyTemp, dailyPrecipWrapper);
+
+  return { 
+    rowWrapper,
+    dayOfWeek,
+    dailyIconWrap,
+    dailyIcon, 
+    dailyTemp,
+    dailyPrecipWrapper,
+    dailyPrecipIcon,
+    dailyPrecip,
     };
 }
 
