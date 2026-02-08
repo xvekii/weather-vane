@@ -347,19 +347,17 @@ header {
   
 .hourly-card {
   grid-area: hourly;
-  background: var(--clr-muted-bg-light);
-  border-radius: var(--radius-20);
-  padding: 1rem 1.5rem;
-  overflow-y: auto;
 }
 
-.hourly-title {
+.hourly-title,
+.daily-title {
   font-size: var(--fs-sm);
   font-weight: bold;
   color: var(--clr-txt-muted);
 }
 
-.hourly-card-inner-content {
+.hourly-card-inner-content,
+.daily-card-inner-content {
   font-size: var(--fs-sm);
   padding: .5rem 0rem;
   display: grid;
@@ -397,20 +395,16 @@ header {
   height: 1.8rem;
 }
 
-.hourly-temp {
+.hourly-temp,
+.hourly-precip-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
   font-variant-numeric: tabular-nums;
-  /* justify-content: center; */
 }
 
 .hourly-precip-wrap {
-  display: flex;
   flex-direction: row-reverse;
-  justify-content: center;
-  align-items: center;
-  font-variant-numeric: tabular-nums;
 }
 
 .hourly-precip {
@@ -423,9 +417,14 @@ header {
 
 .daily-card {
   grid-area: daily;
+}
+
+.hourly-card,
+.daily-card {
   background: var(--clr-muted-bg-light);
   border-radius: var(--radius-20);
-  padding: var(--spc-5);
+  padding: 1rem 1.5rem;
+  overflow-y: auto;
 }
 
 img {
