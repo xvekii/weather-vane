@@ -176,7 +176,7 @@ header {
   min-width: 55rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 4rem 14rem 20rem;
+  grid-template-rows: 4rem 14rem 26.5rem;
   grid-template-areas:
     "search search"
     "main secondary"
@@ -345,7 +345,6 @@ header {
   line-height: var(--lh-normal);
 }
   
-
 .hourly-card {
   grid-area: hourly;
   background: var(--clr-muted-bg-light);
@@ -371,7 +370,7 @@ header {
   /* border: 1px solid purple; */
   height: 2rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3.4rem 3rem 3rem 4rem;
   align-items: center;
   gap: var(--spc-8);
 }
@@ -390,8 +389,7 @@ header {
   height: 1.8rem;
 }
 
-.hourly-icon, 
-.hourly-precip-icon {
+.hourly-icon {
   width: 1.8rem;
 }
 
@@ -399,19 +397,28 @@ header {
   height: 1.8rem;
 }
 
-.hourly-temp-wrap {
+.hourly-temp {
   display: flex;
-  gap: var(--spc-2);
+  justify-content: center;
+  align-items: center;
   font-variant-numeric: tabular-nums;
   /* justify-content: center; */
 }
 
 .hourly-precip-wrap {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
   font-variant-numeric: tabular-nums;
-  gap: var(--spc-1);
+}
+
+.hourly-precip {
+  width: 3rem;
+}
+
+.hourly-precip-icon {
+  width: 1.3rem;
 }
 
 .daily-card {
