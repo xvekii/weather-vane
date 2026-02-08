@@ -349,7 +349,7 @@ header {
   grid-area: hourly;
   background: var(--clr-muted-bg-light);
   border-radius: var(--radius-20);
-  padding: var(--spc-5);
+  padding: 1rem 1.5rem;
   overflow-y: auto;
 }
 
@@ -361,7 +361,7 @@ header {
 
 .hourly-card-inner-content {
   font-size: var(--fs-sm);
-  padding: 1rem 0rem;
+  padding: .5rem 0rem;
   display: grid;
   gap: var(--spc-1);
 }
