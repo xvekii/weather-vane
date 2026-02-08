@@ -79,6 +79,11 @@ html {
   --width-100-pc: 100%;
 
   /* Border-radius */
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-14: 14px;
+  --radius-16: 16px;
   --radius-18: 18px;
   --radius-20: 20px;
   --radius-50-pc: 50%;
@@ -173,10 +178,10 @@ header {
 }
 
 .main-wrapper {
-  min-width: 55rem;
+  width: clamp(320px, 55rem, 1200px);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 4rem 14rem 26.5rem;
+  grid-template-rows: 4rem 14rem 20.8rem;
   grid-template-areas:
     "search search"
     "main secondary"
@@ -187,7 +192,7 @@ header {
 .main-card {
   grid-area: main;
   background: var(--clr-muted-bg-light);
-  border-radius: var(--radius-20);
+  border-radius: var(--radius-10);
   padding: var(--spc-2);
   display: flex;
   justify-content: center;
@@ -260,7 +265,7 @@ header {
   gap: var(--spc-2);
   grid-template-rows: 1fr 1fr;
   background: var(--clr-bg-light);
-  border-radius: var(--radius-20);
+  border-radius: var(--radius-10);
 }
 
 .second-card-upper-wrap {
@@ -303,13 +308,13 @@ header {
   justify-content: center;
   align-items: center;
   background: var(--clr-muted-bg-light);
-  border-radius: var(--radius-20);
+  border-radius: var(--radius-10);
   padding: var(--spc-2);
 }
 
 .second-card-bottom-wrap {
   background: var(--clr-muted-bg-light);
-  border-radius: var(--radius-20);
+  border-radius: var(--radius-10);
   padding: var(--spc-2);
   overflow-y: auto;
 }
@@ -319,7 +324,7 @@ header {
   justify-content: space-around;
   align-items: center;
   background: var(--clr-muted-bg-light);
-  border-radius: var(--radius-20);
+  border-radius: var(--radius-10);
   padding: var(--spc-2);
 }
 
@@ -362,6 +367,7 @@ header {
   padding: .5rem 0rem;
   display: grid;
   gap: var(--spc-1);
+  margin-top: .8em;
 }
 
 .row {
@@ -369,13 +375,15 @@ header {
   height: 2rem;
   display: grid;
   grid-template-columns: 3.4rem 3rem 3rem 4rem;
+  justify-content: space-between;
   align-items: center;
   gap: var(--spc-8);
 }
 
-.hours { 
+.hours,
+.day-of-week { 
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-variant-numeric: tabular-nums;
 }
@@ -430,7 +438,7 @@ header {
 .hourly-card,
 .daily-card {
   background: var(--clr-muted-bg-light);
-  border-radius: var(--radius-20);
+  border-radius: var(--radius-10);
   padding: 1rem 1.5rem;
   overflow-y: auto;
 }
@@ -446,11 +454,11 @@ img {
   }
 }
 
-@media (max-width: 500px) {
+@media (min-width: 519px) and (max-width: 700px) {
   .main-wrapper {
-    width: 75%;
+    width: 80%;
     grid-template-columns: 1fr;
-    grid-template-rows: 3rem 10rem 10rem 20rem 20rem;
+    grid-template-rows: 3rem 10rem 14rem 20rem 20rem;
     grid-template-areas:
       "search"
       "main"
@@ -459,28 +467,82 @@ img {
       "daily";
     gap: var(--spc-2);
   }
+  
+  .main-weather-img {
+    width: 50%;
+    object-fit: contain;
+  }
+
+  .row {
+    justify-content: space-evenly;
+  }
+
 }
 
-@media (min-width: 501px) {
+@media (max-width: 518px) {
   .main-wrapper {
+    width: 85%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3rem 10rem 14rem 20rem 20rem;
+    grid-template-areas:
+      "search"
+      "main"
+      "secondary"
+      "hourly"
+      "daily";
+    gap: var(--spc-2);
+  }
+
+  .main-card,
+  #searchForm {
+    max-width: 100%;
+  }
+
+  .second-card-upper-wrap {
+    grid-template-columns: 1fr 1fr 2fr;
+  }
+
+  .row {
+    gap: var(--spc-4);
+  }
+}
+
+@media (min-width: 601px) {
+  .main-wrapper {
+    width: 80%;
     padding: 0 1rem;
   }
-}
 
-@media (min-width: 501px) {
-  .main-wrapper {
-    width: 70%;
+  .main-card,
+  #searchForm {
+    max-width: 100%;
+  }
+
+  .second-card-upper-wrap {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .row {
+    gap: var(--spc-4);
   }
 }
 
-@media (min-width: 900px) {
+
+@media (min-width: 701px) {
   .main-wrapper {
-    width: 75%;
+    width: 95%;
   }
 }
 
 @media (min-width: 1000px) {
   .main-wrapper {
-    width: 45rem;
+    width: 55rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .main-wrapper {
+    width: 65rem;
+    grid-template-rows: 4rem 14rem 38.7rem;
   }
 }
