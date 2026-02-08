@@ -52,8 +52,8 @@ export function fillSecondaryCardWeather({
   const sunrise = sunriseTime.slice(0, 5);
   const sunset = sunsetTime.slice(0, 5);
   
-  humidityVal.textContent = `${humidity}%`;
-  windspeedVal.textContent = `${windSpeed} ${KMH}`;
+  humidityVal.textContent = `${Math.round(humidity)}%`;
+  windspeedVal.textContent = `${Math.round(windSpeed)} ${KMH}`;
   sunriseVal.textContent = sunrise;
   sunsetVal.textContent = sunset;
 
@@ -121,10 +121,10 @@ export function fillDailyCardWeather({ data }) {
   const dailyInnerContainer = document.querySelector(".daily-card-inner-content");
   dailyInnerContainer.replaceChildren();
   const options = {
-    weekday: "long",
+    weekday: "short",
   };
   
-  data.days.forEach((day) => {
+  data.days.forEach((day, idx) => {
     const {
       rowWrapper,
       dayOfWeek,
@@ -144,7 +144,7 @@ export function fillDailyCardWeather({ data }) {
     const icon = day.icon;
     const precip = day.precipprob;
     
-    dayOfWeek.textContent = currDayName;
+    dayOfWeek.textContent = idx === 0 ? "Today" : currDayName;
     setWeatherIcon({ iconName: icon, iconRef: dailyIcon, iconCont: dailyIconWrap });
     dailyTemp.textContent = `${Math.round(temp)}°`;
     setWeatherIcon({ iconName: "precip", iconRef: dailyPrecipIcon, iconCont: dailyPrecipWrapper });
@@ -199,7 +199,7 @@ function createDailyRow() {
   const rowWrapper = createDiv({ classes: ["daily-wrap", "row"] });
 
   // Days
-  const dayOfWeek = createSpan({ classes: ["dayOfWeek"] });
+  const dayOfWeek = createSpan({ classes: ["day-of-week"] });
 
   const dailyIconWrap = createSpan({
     classes: ["daily-icon-wrap"],
