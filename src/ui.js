@@ -83,9 +83,7 @@ const hourlyInnerContainer = document.querySelector(".hourly-card-inner-content"
         hours,
         hourlyIconWrap,
         hourlyIcon,
-        hourlyTempWrapper,
-        hourlyTempMin,
-        hourlyTempMax,
+        hourlyTemp,
         hourlyPrecipWrapper,
         hourlyPrecipIcon,
         hourlyPrecip,
@@ -99,15 +97,13 @@ const hourlyInnerContainer = document.querySelector(".hourly-card-inner-content"
       // console.log(data.days[currDay].datetime);
       
       const icon = data.days[currDay].hours[currHr].icon;
-      const precip = data.days[currDay].hours[currHr].precip;
-      const tempMin = data.days[currDay].tempmin;
-      const tempMax = data.days[currDay].tempmax;
+      const precip = data.days[currDay].hours[currHr].precipprob;
+      const temp = data.days[currDay].hours[currHr].temp;
 
       hours.textContent = hrs;
 
       setWeatherIcon({ iconName: icon, iconRef: hourlyIcon, iconCont: hourlyIconWrap });
-      hourlyTempMin.textContent = `${Math.round(tempMin)}°`;
-      hourlyTempMax.textContent = `${Math.round(tempMax)}°`;
+      hourlyTemp.textContent = `${Math.round(temp)}°`;
       setWeatherIcon({ iconName: "precip", iconRef: hourlyPrecipIcon, iconCont: hourlyPrecipWrapper });
       hourlyPrecip.textContent = `${Math.round(precip)}%`;
 
@@ -150,9 +146,7 @@ function createHourlyRow() {
   });
 
   // Hourly temp
-  const hourlyTempWrapper = createSpan({ classes: ["hourly-temp-wrap"] });
-  const hourlyTempMin = createSpan({ classes: ["hourly-temp-min"] });
-  const hourlyTempMax = createSpan({ classes: ["hourly-temp-max"] });
+  const hourlyTemp = createSpan({ classes: ["hourly-temp"] });
 
   // Hourly precip
   const hourlyPrecipWrapper = createSpan({ classes: ["hourly-precip-wrap"] });
@@ -161,17 +155,14 @@ function createHourlyRow() {
 
   hourlyIconWrap.append(hourlyIcon);
   hourlyPrecipWrapper.append(hourlyPrecip);
-  hourlyTempWrapper.append(hourlyTempMin, hourlyTempMax);
-  rowWrapper.append(hours, hourlyIconWrap, hourlyTempWrapper, hourlyPrecipWrapper);
+  rowWrapper.append(hours, hourlyIconWrap, hourlyTemp, hourlyPrecipWrapper);
 
   return { 
     rowWrapper,
     hours,
     hourlyIconWrap,
-    hourlyIcon,
-    hourlyTempWrapper, 
-    hourlyTempMin,
-    hourlyTempMax,
+    hourlyIcon, 
+    hourlyTemp,
     hourlyPrecipWrapper,
     hourlyPrecipIcon,
     hourlyPrecip,
