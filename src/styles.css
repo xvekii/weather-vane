@@ -108,6 +108,11 @@ header {
   width: var(--width-90-pc);
 }
 
+button {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
+
 .settings-div {
   background: purple;
 }
@@ -142,6 +147,7 @@ header {
   max-height: 20rem;
   overflow-y: auto;
   overflow-x: hidden;
+  z-index: 5;
 }
 
 .loc-span {
@@ -197,6 +203,98 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.settings-menu-btn {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: .4rem;
+  background: transparent;
+  top: .6rem;
+  right: .5rem;
+  border: transparent;
+  border-radius: var(--radius-50-pc);
+  transition: background-color 300ms;
+  cursor: pointer;
+}
+
+.settings-menu-btn:hover {
+  background-color: var(--clr-muted-bg-dark);
+
+}
+
+.settings-menu-btn > svg path {
+  fill: var(--clr-txt-muted);
+}
+
+.settings-menu {
+  display: grid;
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  top: 3.6rem;
+  right: 0;
+  width: 10rem;
+  background: var(--clr-bg-light);
+  color: var(--clr-bg-dark);
+  box-shadow: 0px 0px 2px 2px #00000021;
+  border-radius: 4px;
+  padding: var(--spc-2);
+  word-wrap: break-word;
+  max-height: 20rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 4;
+  gap: .8rem;
+  transition: opacity 100ms, visibility 100ms;
+}
+
+.settings-menu.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.settings-menu-row {
+  padding: var(--spc-3);
+  color: var(--clr-bg-dark);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.theme-icon,
+.temp-units-icon,
+.speed-units-icon {
+  width: 1.4rem;
+}
+
+.theme-btn,
+.temp-units-btn,
+.speed-units-btn {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding: .2rem .3rem;
+  font-size: var(--fs-sm);
+  font-weight: bold;
+  background: transparent;
+  border: transparent;
+  height: 1.8rem;
+  cursor: pointer;
+}
+
+.settings-options-btn {
+}
+
+.settings-menu-span:hover,
+.options-btn:hover {
+  background-color: var(--clr-muted-bg-light);
 }
 
 .main-inner-wrapper {

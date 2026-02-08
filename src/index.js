@@ -12,28 +12,20 @@ import {
   setWeatherIcon,
 } from "./ui.js";
 import { searchLocations, getWeather } from "./api.js";
+import { createImg } from "./elements.js";
 
 const form = document.querySelector("#searchForm");
 const input = document.querySelector("#query");
 const formLoader = form.querySelector(".loader");
 const locationsDiv = document.createElement("div");
+const settingsMenuBtn = document.querySelector(".settings-menu-btn");
+const settingsMenu = document.querySelector(".settings-menu");
 
 const mainCard = document.querySelector(".main-card");
 const mainContentLeft = document.querySelector(".main-inner-content-left");
 
 const mainContentRight = document.querySelector(".main-inner-content-right");
 const mainWeatherIcon = document.querySelector(".main-weather-img");
-
-const hourlyTitle = document.querySelector(".hourly-title");
-const hourly = document.querySelector(".hourly");
-
-const hours = document.querySelector(".hours");
-const hourlyIcons = document.querySelector(".hourly-icons");
-const hourlyTemp = document.querySelector(".hourly-temp");
-const hourlyTempMin = document.querySelector(".hourly-temp-min");
-const hourlyTempMax = document.querySelector(".hourly-temp-max");
-const hourlyPrecip = document.querySelector(".hourly-precip");
-
 
 // Add one function show?
 
@@ -65,6 +57,42 @@ locationsDiv.addEventListener("mousedown", (e) => {
   
   hide(locationsDiv, "location");
 });
+
+settingsMenuBtn.addEventListener("mousedown", () => {
+  const themeBtn = document.querySelector(".theme-btn");
+  const tempUnitsBtn = document.querySelector(".temp-units-btn");
+  const speedUnitsBtn = document.querySelector(".speed-units-btn");
+  
+  themeBtn.textContent = "Dark theme";
+  tempUnitsBtn.textContent = "Fahrenheit";
+  speedUnitsBtn.textContent = "mi/h";
+
+  const themeIcon = createImg({ classes: ["theme-icon"] });
+  const tempUnitsIcon = createImg({ classes: ["temp-units-icon"] });
+  const speedUnitsIcon = createImg({ classes: ["speed-units-icon"] });
+
+  setWeatherIcon({ iconName: "dark-mode", iconRef: themeIcon, iconCont: themeBtn });
+  setWeatherIcon({ iconName: "degrees", iconRef: tempUnitsIcon, iconCont: tempUnitsBtn });
+  setWeatherIcon({ iconName: "speed-unit", iconRef: speedUnitsIcon, iconCont: speedUnitsBtn });
+
+  settingsMenu.classList.toggle("active");
+});
+
+
+// settingsMenu.replaceChildren();
+  // const btn0Txt = ""
+
+  // for (let i = 0; i < 3; i++) {
+  //   const menuRow = document.createElement("div");
+  //   menuRow.classList.add("settings-menu-row");
+
+  //   const menuOptionsBtn = document.createElement("button");
+  //   menuOptionsBtn.classList.add(`menu-options-btn${i}`);
+  //   menuOptionsBtn.textContent = ""
+  //   menuRow.append(menuOptionsBtn);
+
+  //   settingsMenu.append(menuRow);
+  // }
 
 async function handleGetWeather(loc) {
   try {
