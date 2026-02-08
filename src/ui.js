@@ -121,14 +121,45 @@ const hourlyInnerContainer = document.querySelector(".hourly-card-inner-content"
   }
 }
 
-    // const fullTime = data.currentConditions.datetime;
-    // const time = fullTime.slice(0, 5);
-    // const currentHours = Number(time);
-    
-    // const icon = data.days[i].hours[i].icon;
-    // const precip = data.days[i].hours[i].precip;
-    // const tempMin = data.days[i].tempmin;
-    // const tempMax = data.days[i].tempmax;
+
+function createDailyRow() {
+  // Row wrapper
+  const rowWrapper = createDiv({ classes: ["daily-wrap", "row"] });
+
+  // Hours
+  const days = createSpan({ classes: ["days"] });
+
+  const dailyIconWrap = createSpan({
+    classes: ["daily-icon-wrap"],
+  });
+
+  const dailyIcon = createImg({
+    classes: ["daily-icon"],
+  });
+
+  // Hourly temp
+  const dailyTemp = createSpan({ classes: ["daily-temp"] });
+
+  // Hourly precip
+  const dailyPrecipWrapper = createSpan({ classes: ["daily-precip-wrap"] });
+  const dailyPrecipIcon = createImg({ classes: ["daily-precip-icon"] });
+  const dailyPrecip = createSpan({ classes: ["daily-precip"] });
+
+  dailyIconWrap.append(hourlyIcon);
+  dailyPrecipWrapper.append(dailyPrecip);
+  rowWrapper.append(days, dailyIconWrap, dailyTemp, dailyPrecipWrapper);
+
+  return { 
+    rowWrapper,
+    days,
+    dailyIconWrap,
+    dailyIcon, 
+    dailyTemp,
+    dailyPrecipWrapper,
+    dailyPrecipIcon,
+    dailyPrecip,
+    };
+}
 
 function createHourlyRow() {
   // Row wrapper
