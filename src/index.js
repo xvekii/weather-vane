@@ -27,6 +27,10 @@ const mainContentLeft = document.querySelector(".main-inner-content-left");
 const mainContentRight = document.querySelector(".main-inner-content-right");
 const mainWeatherIcon = document.querySelector(".main-weather-img");
 
+const themeBtn = document.querySelector(".theme-btn");
+const tempUnitsBtn = document.querySelector(".temp-units-btn");
+const speedUnitsBtn = document.querySelector(".speed-units-btn");
+
 // Add one function show?
 
 input.addEventListener("input", async () => {
@@ -59,11 +63,7 @@ locationsDiv.addEventListener("mousedown", (e) => {
 });
 
 settingsMenuBtn.addEventListener("mousedown", () => {
-  const themeBtn = document.querySelector(".theme-btn");
-  const tempUnitsBtn = document.querySelector(".temp-units-btn");
-  const speedUnitsBtn = document.querySelector(".speed-units-btn");
-  
-  themeBtn.textContent = "Dark theme";
+  themeBtn.textContent = "Light theme";
   tempUnitsBtn.textContent = "Fahrenheit";
   speedUnitsBtn.textContent = "mi/h";
 
@@ -71,13 +71,20 @@ settingsMenuBtn.addEventListener("mousedown", () => {
   const tempUnitsIcon = createImg({ classes: ["temp-units-icon"] });
   const speedUnitsIcon = createImg({ classes: ["speed-units-icon"] });
 
-  setWeatherIcon({ iconName: "dark-mode", iconRef: themeIcon, iconCont: themeBtn });
+  setWeatherIcon({ iconName: "light-mode", iconRef: themeIcon, iconCont: themeBtn });
   setWeatherIcon({ iconName: "degrees", iconRef: tempUnitsIcon, iconCont: tempUnitsBtn });
   setWeatherIcon({ iconName: "speed-unit", iconRef: speedUnitsIcon, iconCont: speedUnitsBtn });
 
   settingsMenu.classList.toggle("active");
 });
 
+settingsMenu.addEventListener("click", (e) => {
+  const clicked = e.target;
+
+  if (!clicked.classList.contains("dark")) {
+    document.body.classList.toggle('dark');
+  }
+});
 
 // settingsMenu.replaceChildren();
   // const btn0Txt = ""

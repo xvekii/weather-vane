@@ -29,6 +29,7 @@ html {
 :root {
   /* Base font size */
   --fs-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  color-scheme: light dark;
 
 /* Type scale */
   --fs-xs: clamp(0.75rem, 0.70rem + 0.2vw, 0.875rem);
@@ -62,12 +63,17 @@ html {
   --clr-bg-light: #FFFFFF;
   --clr-bg-dark: #0A0B0BE3;
   --clr-muted-bg-light: #d9d9d95b;
+  --clr-muted-bg-light-hover: #d9d9d95b;
   --clr-muted-bg-dark: #CDCDCD70;
+  --clr-bg-dark-mode: #111212;
+
+  --filter-clr-svg: brightness(0) invert(0);
 
   /* Text */
   --clr-txt-light: #FFFFFF;
   --clr-txt-dark: #000000;
   --clr-txt-muted: #080808b0;
+  --clr-txt-dark-muted: #d8d8d8;
 
   /* Width */
   /* Cards */
@@ -155,16 +161,25 @@ button {
   color: var(--clr-bg-dark);
   border-radius: 2px;
   cursor: pointer;
+  color: var(--clr-txt-dark);
+  background-color: var(--clr-bg-light);
 }
 
 .loc-span:hover {
-  background-color: var(--clr-muted-bg-light);
+  background-color: var(--clr-muted-bg-light-hover);
 }
 
 .search-icon {
   position: absolute;
   left: var(--spc-4);
 }
+
+.theme-icon,
+.temp-units-icon,
+.speed-units-icon,
+.search-icon {
+  filter: var(--filter-clr-svg);
+} 
 
 #query {
   font-size: var(--fs-base);
@@ -173,6 +188,7 @@ button {
   padding: .6rem 3rem;
   background: var(--clr-muted-bg-light);
   width: var(--width-100-pc);
+  color: var(--clr-txt-dark);
 }
 
 #searchForm {
@@ -270,6 +286,7 @@ button {
 .temp-units-icon,
 .speed-units-icon {
   width: 1.4rem;
+  color: 
 }
 
 .theme-btn,
@@ -287,9 +304,7 @@ button {
   border: transparent;
   height: 1.8rem;
   cursor: pointer;
-}
-
-.settings-options-btn {
+  color: var(--clr-txt-dark);
 }
 
 .settings-menu-span:hover,
@@ -344,6 +359,7 @@ button {
   font-weight: bold;
   white-space: nowrap;
   letter-spacing: -2px;
+  color: var(--clr-txt-dark);
 }
 
 .main-feels-like-wrapper {
@@ -378,17 +394,20 @@ button {
   margin-bottom: var(--spc-2);
   color: var(--clr-txt-muted);
   min-height: 1rem;
+  color: var(--clr-txt-dark);
 }
 
 .txt-bold-sm {
   font-size: var(--fs-sm);
   font-weight: bold;
   margin-bottom: var(--spc-1);
+  color: var(--clr-txt-dark);
 }
 
 .txt-bold-sm-no-margin {
   font-size: var(--fs-sm);
   font-weight: bold;
+  color: var(--clr-txt-dark);
 }
 
 .txt-reg-xs {
@@ -446,6 +465,7 @@ button {
   font-size: var(--fs-sm);
   font-weight: normal;
   line-height: var(--lh-normal);
+  color: var(--clr-txt-dark);
 }
   
 .hourly-card {
@@ -484,6 +504,7 @@ button {
   justify-content: flex-start;
   align-items: center;
   font-variant-numeric: tabular-nums;
+  color: var(--clr-txt-dark);
 }
 
 .hourly-icon-wrap,
@@ -512,6 +533,7 @@ button {
   justify-content: center;
   align-items: center;
   font-variant-numeric: tabular-nums;
+  color: var(--clr-txt-dark);
 }
 
 .hourly-precip-wrap,
@@ -545,6 +567,23 @@ img {
   width: 100%;
 }
 
+
+.dark {
+  color-scheme: dark;
+  --clr-bg-light: #232121;
+  --clr-bg-dark: #FFFFFF;
+  --clr-bg-dark-mode: #111212;
+
+  --clr-muted-bg-light: #7b7a7a5b;
+  --clr-muted-bg-dark: #CDCDCD70;
+  
+  --clr-txt-light: #FFFFFF;
+  --clr-txt-dark: #FFFFFF;
+  --clr-txt-muted: #ffffffc5;
+
+  --clr-muted-bg-light-hover: #7b7a7a5b;
+  --filter-clr-svg: brightness(0) invert(1);
+}
 
 @keyframes rotate {
   100% {
@@ -617,7 +656,7 @@ img {
   }
 
   .second-card-upper-wrap {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1.3fr;
   }
 
   .row {
