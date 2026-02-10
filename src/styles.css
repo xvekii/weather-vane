@@ -29,7 +29,6 @@ html {
 :root {
   /* Base font size */
   --fs-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  color-scheme: light dark;
 
 /* Type scale */
   --fs-xs: clamp(0.75rem, 0.70rem + 0.2vw, 0.875rem);
@@ -105,7 +104,7 @@ body {
   grid-template-rows: 2.5rem 1fr 2.5rem;
   overflow-x: hidden;
   overflow-y: auto;
-  /* transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 header {
