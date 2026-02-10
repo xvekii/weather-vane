@@ -144,14 +144,4 @@ function setWeatherData(data) {
   fillDailyCardWeather({ data });
 }
 
-
-
-
-
-// function fillRowData() {
-    // fill in alt with weather icon name
-// }
-
-
-
 handleGetWeather("Đurđevac, Croácia");

@@ -60,6 +60,8 @@ export function fillMainCardWeather({ temp, currConditions, feelsLike, }) {
   mainWeatherTxt.textContent = currConditions;
 }
 
+// function switchToFahrenheit
+
 export function fillSecondaryCardWeather({ 
   humidity, 
   windSpeed,
