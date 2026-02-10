@@ -105,6 +105,7 @@ body {
   grid-template-rows: 2.5rem 1fr 2.5rem;
   overflow-x: hidden;
   overflow-y: auto;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 header {
@@ -235,11 +236,6 @@ button {
   border-radius: var(--radius-50-pc);
   transition: background-color 300ms;
   cursor: pointer;
-}
-
-.settings-menu-btn:hover {
-  background-color: var(--clr-muted-bg-dark);
-
 }
 
 .settings-menu-btn > svg path {
@@ -588,6 +584,12 @@ img {
 @keyframes rotate {
   100% {
     rotate: 360deg;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .settings-menu-btn:hover {
+    background-color: var(--clr-muted-bg-dark);
   }
 }
 

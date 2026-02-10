@@ -5,6 +5,31 @@ const FAHRENHEIT = "F";
 const KMH = "km/h";
 const MPH = "m/h";
 
+
+export function enableDarkmode(themeBtn) {
+  if (themeBtn) showDarkmodeBtn(themeBtn);
+  document.body.classList.add('dark');
+  localStorage.setItem("darkmode", "active");
+}
+
+export function disableDarkmode(themeBtn) {
+  if (themeBtn) showLightmodeBtn(themeBtn);
+  document.body.classList.remove('dark');
+  localStorage.setItem("darkmode", null);
+}
+
+export function showDarkmodeBtn(themeBtn) {
+  themeBtn.textContent = "Dark mode";
+  const themeIcon = createImg({ classes: ["theme-icon"] });
+  setWeatherIcon({ iconName: "dark-mode", iconRef: themeIcon, iconCont: themeBtn });
+}
+
+export function showLightmodeBtn(themeBtn) {
+  themeBtn.textContent = "Light mode";
+  const themeIcon = createImg({ classes: ["theme-icon"] });
+  setWeatherIcon({ iconName: "light-mode", iconRef: themeIcon, iconCont: themeBtn });
+}
+
 export function showLoader(loader) {
   loader.classList.add("is-visible");
 }

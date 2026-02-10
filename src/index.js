@@ -10,6 +10,8 @@ import {
   fillDailyCardWeather,
   showLocations,
   setWeatherIcon,
+  enableDarkmode,
+  disableDarkmode,
 } from "./ui.js";
 import { searchLocations, getWeather } from "./api.js";
 import { createImg } from "./elements.js";
@@ -30,6 +32,12 @@ const mainWeatherIcon = document.querySelector(".main-weather-img");
 const themeBtn = document.querySelector(".theme-btn");
 const tempUnitsBtn = document.querySelector(".temp-units-btn");
 const speedUnitsBtn = document.querySelector(".speed-units-btn");
+
+let darkmode = localStorage.getItem("darkmode");
+
+if (darkmode === "active") {
+  enableDarkmode(themeBtn);
+} 
 
 // Add one function show?
 
@@ -62,16 +70,21 @@ locationsDiv.addEventListener("mousedown", (e) => {
   hide(locationsDiv, "location");
 });
 
-settingsMenuBtn.addEventListener("mousedown", () => {
-  themeBtn.textContent = "Light theme";
-  tempUnitsBtn.textContent = "Fahrenheit";
-  speedUnitsBtn.textContent = "mi/h";
-
+settingsMenuBtn.addEventListener("click", () => {
   const themeIcon = createImg({ classes: ["theme-icon"] });
   const tempUnitsIcon = createImg({ classes: ["temp-units-icon"] });
   const speedUnitsIcon = createImg({ classes: ["speed-units-icon"] });
 
-  setWeatherIcon({ iconName: "light-mode", iconRef: themeIcon, iconCont: themeBtn });
+  if (darkmode === "active") {
+    themeBtn.textContent = "Dark theme";
+    setWeatherIcon({ iconName: "dark-mode", iconRef: themeIcon, iconCont: themeBtn });
+  } else {
+    themeBtn.textContent = "Light theme";
+    setWeatherIcon({ iconName: "light-mode", iconRef: themeIcon, iconCont: themeBtn });
+  }
+
+  tempUnitsBtn.textContent = "Fahrenheit";
+  speedUnitsBtn.textContent = "mi/h";
   setWeatherIcon({ iconName: "degrees", iconRef: tempUnitsIcon, iconCont: tempUnitsBtn });
   setWeatherIcon({ iconName: "speed-unit", iconRef: speedUnitsIcon, iconCont: speedUnitsBtn });
 
@@ -81,25 +94,11 @@ settingsMenuBtn.addEventListener("mousedown", () => {
 settingsMenu.addEventListener("click", (e) => {
   const clicked = e.target;
 
-  if (!clicked.classList.contains("dark")) {
-    document.body.classList.toggle('dark');
+  if (clicked.closest(".theme-btn")) {
+    darkmode = localStorage.getItem("darkmode");
+    darkmode !== "active" ? enableDarkmode(themeBtn) : disableDarkmode(themeBtn);
   }
 });
-
-// settingsMenu.replaceChildren();
-  // const btn0Txt = ""
-
-  // for (let i = 0; i < 3; i++) {
-  //   const menuRow = document.createElement("div");
-  //   menuRow.classList.add("settings-menu-row");
-
-  //   const menuOptionsBtn = document.createElement("button");
-  //   menuOptionsBtn.classList.add(`menu-options-btn${i}`);
-  //   menuOptionsBtn.textContent = ""
-  //   menuRow.append(menuOptionsBtn);
-
-  //   settingsMenu.append(menuRow);
-  // }
 
 async function handleGetWeather(loc) {
   try {
