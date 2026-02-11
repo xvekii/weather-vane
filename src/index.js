@@ -68,8 +68,16 @@ input.addEventListener("input", async () => {
   console.log(locations);
 });
 
+input.addEventListener("blur", () => {
+  setTimeout(() => {
+    if (!input.value.trim()) {
+      input.value = localStorage.getItem("lastLocation") || defaultLoc;
+    }
+  }, 200);
+});
+
 // Get location value on click, pass to getWeather
-locationsDiv.addEventListener("mousedown", (e) => {
+locationsDiv.addEventListener("click", (e) => {
   const span = e.target.closest(".loc-span");
   if (!span) return;
   
