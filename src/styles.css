@@ -234,6 +234,7 @@ button {
   border-radius: var(--radius-50-pc);
   transition: background-color 300ms;
   cursor: pointer;
+  z-index: 2;
 }
 
 .settings-menu-btn > svg path {
@@ -446,6 +447,11 @@ button {
   align-items: center;
 }
 
+.severe-weather-alerts {
+  display: flex;
+  flex-direction: column;
+}
+
 .severe-alerts-title-wrap {
   display: flex;
   justify-content: flex-start;
@@ -454,11 +460,11 @@ button {
 
 .severe-alerts-txt {
   margin: 0rem .5rem;
-  justify-self: center;
   font-size: var(--fs-sm);
   font-weight: normal;
   line-height: var(--lh-normal);
   color: var(--clr-txt-dark);
+  text-align: center;
 }
   
 .hourly-card {
@@ -576,6 +582,25 @@ img {
 
   --clr-muted-bg-light-hover: #7b7a7a5b;
   --filter-clr-svg: brightness(0) invert(1);
+}
+
+
+body.dark ::-webkit-scrollbar-track {
+  background: #232121;
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+  background: #7b7a7a;
+  border-radius: 5px;
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+  background: #9b9a9a;
+}
+
+/* Firefox scrollbar */
+body.dark * {
+  scrollbar-color: #7b7a7a #232121;
 }
 
 @keyframes rotate {
