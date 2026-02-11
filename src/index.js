@@ -20,6 +20,7 @@ const METRIC = "°C, km/h";
 const IMPERIAL = "°F, mph";
 
 const form = document.querySelector("#searchForm");
+
 const input = document.querySelector("#query");
 const formLoader = form.querySelector(".loader");
 const locationsDiv = document.createElement("div");
@@ -36,6 +37,8 @@ const unitsBtnTxt = document.querySelector(".units-txt");
 const themeIcon = createImg({ classes: ["theme-icon"] });
 const unitsIcon = createImg({ classes: ["units-icon"] });
 
+const defaultLoc = "Đurđevac, Croácia";
+
 
 let darkmode = localStorage.getItem("darkmode") || "inactive";
 if (darkmode === "active") {
@@ -46,8 +49,8 @@ let units = localStorage.getItem("units") || "metric";
 unitsBtn.dataset.units = units;
 
 handleGetWeather(
-  localStorage.getItem("lastLocation") || undefined,
-  localStorage.getItem("units") || undefined
+  localStorage.getItem("lastLocation") || defaultLoc,
+  units
 );
 
 input.addEventListener("input", async () => {
@@ -90,7 +93,7 @@ settingsMenuBtn.addEventListener("click", () => {
 
   // Get units from LS
   // Set attr 
-  const currUnits = localStorage.getItem("units");
+  const currUnits = localStorage.getItem("units") || "metric";
   unitsBtn.dataset.units = currUnits;
 
   if (currUnits === "us") {
@@ -115,27 +118,32 @@ settingsMenu.addEventListener("click", (e) => {
     let unitsBtnCurrAttr = unitsBtn.dataset.units;
     
     if (unitsBtnCurrAttr === "us") {
+      units = "metric"; 
       unitsBtn.dataset.units = "metric";
       unitsBtnTxt.textContent = METRIC;
       localStorage.setItem("units", "metric");
     } else {
+      units = "us";
       unitsBtn.dataset.units = "us";
       unitsBtnTxt.textContent = IMPERIAL;
       localStorage.setItem("units", "us");
     }
   
     handleGetWeather(
-      localStorage.getItem("lastLocation"),
-      localStorage.getItem("units")
+      localStorage.getItem("lastLocation") || defaultLoc,
+      units
     );
   }
 });
 
 async function handleGetWeather(loc, units) {
+  const location = loc || defaultLoc;
+  const unitGroup = units || "metric";
+  
   try {
     showLoader(formLoader);
-    const weatherData = await getWeather(loc, units);
-    localStorage.setItem("lastLocation", loc);
+    const weatherData = await getWeather(location, unitGroup);
+    localStorage.setItem("lastLocation", location);
 
     console.log(weatherData);
     setWeatherData(weatherData);
