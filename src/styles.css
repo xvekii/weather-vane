@@ -175,8 +175,7 @@ button {
 }
 
 .theme-icon,
-.temp-units-icon,
-.speed-units-icon,
+.units-icon,
 .search-icon {
   filter: var(--filter-clr-svg);
 } 
@@ -278,14 +277,12 @@ button {
 }
 
 .theme-icon,
-.temp-units-icon,
-.speed-units-icon {
+.units-icon {
   width: 1.4rem;
-  color: 
 }
 
 .theme-btn,
-.temp-units-btn,
+.units-btn,
 .speed-units-btn {
   display: flex;
   flex-direction: row-reverse;
@@ -355,6 +352,7 @@ button {
   white-space: nowrap;
   letter-spacing: -2px;
   color: var(--clr-txt-dark);
+  line-height: 1;
 }
 
 .main-feels-like-wrapper {
