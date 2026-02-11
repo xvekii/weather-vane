@@ -1,10 +1,9 @@
 import { createDiv, createSpan, createImg } from "./elements.js";
 
-const CELSIUS = "C";
-const FAHRENHEIT = "F";
+const CELS= "C";
+const FAHR = "F";
 const KMH = "km/h";
-const MPH = "m/h";
-
+const MPH = "mph";
 
 export function enableDarkmode(themeBtn) {
   if (themeBtn) showDarkmodeBtn(themeBtn);
@@ -15,7 +14,7 @@ export function enableDarkmode(themeBtn) {
 export function disableDarkmode(themeBtn) {
   if (themeBtn) showLightmodeBtn(themeBtn);
   document.body.classList.remove('dark');
-  localStorage.setItem("darkmode", null);
+  localStorage.setItem("darkmode", "inactive");
 }
 
 export function showDarkmodeBtn(themeBtn) {
@@ -38,6 +37,11 @@ export function hideLoader(loader) {
   loader.classList.remove("is-visible");
 }
 
+function setUnits() {
+  const currUnits = localStorage.getItem("units");
+  return currUnits === "us" ? MPH : KMH;
+}
+
 export function fillSearchInput({ locationStr, input }) {
   input.value = locationStr;
 }
@@ -46,6 +50,10 @@ export function fillMainCardWeather({ temp, currConditions, feelsLike, }) {
   const mainTempNum = document.querySelector(".main-temp-num");
   const mainFeelsLike = document.querySelector(".main-feels-like");
   const mainWeatherTxt = document.querySelector(".main-weather-txt");
+
+  const units = setUnits();
+  const tempUnits = units === MPH ? FAHR : CELS;
+
   
   // Main temp
   const displayTemp = Math.round(temp);
@@ -54,13 +62,11 @@ export function fillMainCardWeather({ temp, currConditions, feelsLike, }) {
   // Feels like
   const feelsLikeRaw = feelsLike;
   const feelsLikeRound = Math.round(feelsLikeRaw);
-  mainFeelsLike.textContent = `Feels like ${feelsLikeRound}°`;
+  mainFeelsLike.textContent = `Feels like ${feelsLikeRound}°${tempUnits}`;
 
   // Current conditions
   mainWeatherTxt.textContent = currConditions;
 }
-
-// function switchToFahrenheit
 
 export function fillSecondaryCardWeather({ 
   humidity, 
@@ -78,9 +84,11 @@ export function fillSecondaryCardWeather({
   const noAlerts = "There are no alerts issued at this time.";
   const sunrise = sunriseTime.slice(0, 5);
   const sunset = sunsetTime.slice(0, 5);
+
+  const unit = setUnits();
   
   humidityVal.textContent = `${Math.round(humidity)}%`;
-  windspeedVal.textContent = `${Math.round(windSpeed)} ${KMH}`;
+  windspeedVal.textContent = `${Math.round(windSpeed)} ${unit}`;
   sunriseVal.textContent = sunrise;
   sunsetVal.textContent = sunset;
 
@@ -136,7 +144,6 @@ export function fillHourlyCardWeather({ data }) {
     }
     if (ttlHrs < dayHrs) {
       dayHrs = dayHrs - ttlHrs;
-      console.log(`dayHrsEnd: ${dayHrs}`);
       nextDay = 2;
       currHr = 0;
       ttlHrs = 24;
@@ -165,7 +172,6 @@ export function fillDailyCardWeather({ data }) {
     
     const currDay = new Date(day.datetime);
     const currDayName = currDay.toLocaleDateString(undefined, options);
-    console.log(day.datetime);
 
     const temp = day.temp;
     const icon = day.icon;
