@@ -16,6 +16,9 @@ import {
 import { searchLocations, getWeather } from "./api.js";
 import { createImg } from "./elements.js";
 
+const METRIC = "°C, km/h";
+const IMPERIAL = "°F, mph";
+
 const form = document.querySelector("#searchForm");
 const input = document.querySelector("#query");
 const formLoader = form.querySelector(".loader");
@@ -23,23 +26,29 @@ const locationsDiv = document.createElement("div");
 const settingsMenuBtn = document.querySelector(".settings-menu-btn");
 const settingsMenu = document.querySelector(".settings-menu");
 
-const mainCard = document.querySelector(".main-card");
-const mainContentLeft = document.querySelector(".main-inner-content-left");
-
 const mainContentRight = document.querySelector(".main-inner-content-right");
 const mainWeatherIcon = document.querySelector(".main-weather-img");
 
 const themeBtn = document.querySelector(".theme-btn");
-const tempUnitsBtn = document.querySelector(".temp-units-btn");
-const speedUnitsBtn = document.querySelector(".speed-units-btn");
+const unitsBtn = document.querySelector(".units-btn");
+const unitsBtnTxt = document.querySelector(".units-txt");
 
-let darkmode = localStorage.getItem("darkmode");
+const themeIcon = createImg({ classes: ["theme-icon"] });
+const unitsIcon = createImg({ classes: ["units-icon"] });
 
+
+let darkmode = localStorage.getItem("darkmode") || "inactive";
 if (darkmode === "active") {
   enableDarkmode(themeBtn);
-} 
+}
 
-// Add one function show?
+let units = localStorage.getItem("units") || "metric";
+unitsBtn.dataset.units = units;
+
+handleGetWeather(
+  localStorage.getItem("lastLocation") || undefined,
+  localStorage.getItem("units") || undefined
+);
 
 input.addEventListener("input", async () => {
   if (!input.value.trim()) {
@@ -64,17 +73,13 @@ locationsDiv.addEventListener("mousedown", (e) => {
   e.preventDefault();
   
   const location = span.textContent.trim();
-  handleGetWeather(location);
+  handleGetWeather(location, units);
   input.value = "";
   
   hide(locationsDiv, "location");
 });
 
 settingsMenuBtn.addEventListener("click", () => {
-  const themeIcon = createImg({ classes: ["theme-icon"] });
-  const tempUnitsIcon = createImg({ classes: ["temp-units-icon"] });
-  const speedUnitsIcon = createImg({ classes: ["speed-units-icon"] });
-
   if (darkmode === "active") {
     themeBtn.textContent = "Dark theme";
     setWeatherIcon({ iconName: "dark-mode", iconRef: themeIcon, iconCont: themeBtn });
@@ -83,10 +88,17 @@ settingsMenuBtn.addEventListener("click", () => {
     setWeatherIcon({ iconName: "light-mode", iconRef: themeIcon, iconCont: themeBtn });
   }
 
-  tempUnitsBtn.textContent = "Fahrenheit";
-  speedUnitsBtn.textContent = "mi/h";
-  setWeatherIcon({ iconName: "degrees", iconRef: tempUnitsIcon, iconCont: tempUnitsBtn });
-  setWeatherIcon({ iconName: "speed-unit", iconRef: speedUnitsIcon, iconCont: speedUnitsBtn });
+  // Get units from LS
+  // Set attr 
+  const currUnits = localStorage.getItem("units");
+  unitsBtn.dataset.units = currUnits;
+
+  if (currUnits === "us") {
+    unitsBtnTxt.textContent = IMPERIAL;
+  } else {
+    unitsBtnTxt.textContent = METRIC;
+  }
+  setWeatherIcon({ iconName: "units", iconRef: unitsIcon, iconCont: unitsBtn });
 
   settingsMenu.classList.toggle("active");
 });
@@ -98,18 +110,37 @@ settingsMenu.addEventListener("click", (e) => {
     darkmode = localStorage.getItem("darkmode");
     darkmode !== "active" ? enableDarkmode(themeBtn) : disableDarkmode(themeBtn);
   }
+
+  if (clicked.closest(".units-btn")) {
+    let unitsBtnCurrAttr = unitsBtn.dataset.units;
+    
+    if (unitsBtnCurrAttr === "us") {
+      unitsBtn.dataset.units = "metric";
+      unitsBtnTxt.textContent = METRIC;
+      localStorage.setItem("units", "metric");
+    } else {
+      unitsBtn.dataset.units = "us";
+      unitsBtnTxt.textContent = IMPERIAL;
+      localStorage.setItem("units", "us");
+    }
+  
+    handleGetWeather(
+      localStorage.getItem("lastLocation"),
+      localStorage.getItem("units")
+    );
+  }
 });
 
-async function handleGetWeather(loc) {
+async function handleGetWeather(loc, units) {
   try {
     showLoader(formLoader);
-    const weatherData = await getWeather(loc);
-    
+    const weatherData = await getWeather(loc, units);
+    localStorage.setItem("lastLocation", loc);
+
     console.log(weatherData);
     setWeatherData(weatherData);
 
     const currentWeatherIcon = weatherData.currentConditions.icon;
-    console.log(currentWeatherIcon);
     
     if (currentWeatherIcon) {
       setWeatherIcon({ iconName: currentWeatherIcon, iconRef: mainWeatherIcon, iconCont: mainContentRight });
@@ -143,5 +174,3 @@ function setWeatherData(data) {
   fillHourlyCardWeather({ data });
   fillDailyCardWeather({ data });
 }
-
-handleGetWeather("Đurđevac, Croácia");
