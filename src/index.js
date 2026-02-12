@@ -20,6 +20,9 @@ const METRIC = "°C, km/h";
 const IMPERIAL = "°F, mph";
 
 const form = document.querySelector("#searchForm");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
 
 const input = document.querySelector("#query");
 const formLoader = form.querySelector(".loader");
