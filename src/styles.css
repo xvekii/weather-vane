@@ -495,6 +495,7 @@ button {
   align-items: center;
   font-variant-numeric: tabular-nums;
   color: var(--clr-txt-dark);
+  font-size: var(--fs-sm);
 }
 
 .hourly-icon-wrap,
@@ -703,8 +704,8 @@ body.dark * {
 
 @media (min-width: 1400px) {
   .main-wrapper {
-    width: 65rem;
-    grid-template-rows: 4rem 16rem 38.7rem;
+    width: 62rem;
+    grid-template-rows: 1fr 16rem 38.7rem;
     gap: var(--spc-4);
   }
 }
