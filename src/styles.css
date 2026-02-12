@@ -173,7 +173,7 @@ button {
 } 
 
 #query {
-  font-size: var(--fs-base);
+  font-size: var(--fs-md);
   border-radius: var(--radius-20);
   border: none;
   padding: .6rem 3rem;
@@ -309,7 +309,6 @@ button {
 
 .main-inner-content-left, 
 .main-inner-content-right {
-  /* border: 1px solid purple; */
 }
 
 .main-inner-content-left {
@@ -317,7 +316,6 @@ button {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* gap: var(--spc-2); */
 }
 
 .main-inner-content-right {
@@ -482,7 +480,6 @@ button {
 }
 
 .row {
-  /* border: 1px solid purple; */
   height: 2rem;
   display: grid;
   grid-template-columns: 3.4rem 3rem 3rem 4rem;
@@ -555,6 +552,15 @@ button {
   padding: 1rem 1.5rem;
   overflow-y: auto;
 }
+
+.main-card,
+.settings-menu,
+.secondary-card,
+.hourly-card,
+.daily-card {
+  user-select: none;
+}
+
 
 img {
   width: 100%;
