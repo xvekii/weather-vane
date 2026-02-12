@@ -37,7 +37,7 @@ const unitsBtnTxt = document.querySelector(".units-txt");
 const themeIcon = createImg({ classes: ["theme-icon"] });
 const unitsIcon = createImg({ classes: ["units-icon"] });
 
-const defaultLoc = "Đurđevac, Croácia";
+const defaultLoc = "Shanghai, China";
 
 
 let darkmode = localStorage.getItem("darkmode") || "inactive";
