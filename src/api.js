@@ -12,7 +12,6 @@ export async function searchLocations(query) {
     return locations;
 
   } catch (err) {
-    // Add N/A
     console.error('Error fetching locations:', err);
   }
 }
@@ -32,7 +31,7 @@ export async function getWeather(loc = "Đurđevac, Croácia", units = "metric")
     return weatherData;
 
   } catch (err) {
-    // Add N/A
+
     console.error('Error fetching weather:', err);
     throw err;
   }
