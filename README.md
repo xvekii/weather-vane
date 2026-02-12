@@ -48,6 +48,6 @@ A weather application with location search, hourly and daily forecasts, and cust
 
 ### Mobile view, light and dark mode
 <p align="center">
-  <img alt="m1" src="https://github.com/user-attachments/assets/a477dcb2-28cb-4569-80c0-08f6361f9441" width="300" style="margin:0px 20px;" />
-  <img alt="m2dm" src="https://github.com/user-attachments/assets/d4b57bd9-1a68-4d6d-aa81-8a5b670b49da" width="300" style="margin:0px 20px;" />
+  <img alt="m1" src="https://github.com/user-attachments/assets/a477dcb2-28cb-4569-80c0-08f6361f9441" width="300" style="margin:10px 20px;" />
+  <img alt="m2dm" src="https://github.com/user-attachments/assets/d4b57bd9-1a68-4d6d-aa81-8a5b670b49da" width="300" style="margin:10px 20px;" />
 </p>
