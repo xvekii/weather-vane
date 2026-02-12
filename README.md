@@ -38,8 +38,6 @@ A weather application with location search, hourly and daily forecasts, and cust
 
 ## Screenshots
 
-## Screenshots
-
 ### Desktop view, light mode
 <img alt="dt1" src="https://github.com/user-attachments/assets/cf359318-6c4d-4c38-9aaf-8db3bbe5da05" />
 
