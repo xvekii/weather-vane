@@ -60,7 +60,7 @@ input.addEventListener("input", async () => {
   }
   const query = input.value.trim();
   
-  if(query < 2) {
+  if (query.length < 2) {
     return;
   }
   const locations = await searchLocations(query);
