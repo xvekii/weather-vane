@@ -65,7 +65,6 @@ input.addEventListener("input", async () => {
   }
   const locations = await searchLocations(query);
   showLocations({ locations, locationsDiv, form });
-  console.log(locations);
 });
 
 input.addEventListener("blur", () => {
@@ -153,9 +152,7 @@ async function handleGetWeather(loc, units) {
     const weatherData = await getWeather(location, unitGroup);
     localStorage.setItem("lastLocation", location);
 
-    console.log(weatherData);
     setWeatherData(weatherData);
-
     const currentWeatherIcon = weatherData.currentConditions.icon;
     
     if (currentWeatherIcon) {
