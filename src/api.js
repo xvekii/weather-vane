@@ -3,7 +3,7 @@ const LOCATION_API_KEY = "bd15706d81c640a398a191135262501";
 
 export async function searchLocations(query) {
   try {
-    const res = await fetch(`http://api.weatherapi.com/v1/search.json?key=${LOCATION_API_KEY}&q=${encodeURIComponent(query)}`);
+    const res = await fetch(`https://api.weatherapi.com/v1/search.json?key=${LOCATION_API_KEY}&q=${encodeURIComponent(query)}`);
     
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
@@ -13,6 +13,7 @@ export async function searchLocations(query) {
 
   } catch (err) {
     console.error('Error fetching locations:', err);
+    return [];
   }
 }
 
