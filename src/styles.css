@@ -63,6 +63,7 @@ html {
   --clr-bg-light: #FFFFFF;
   --clr-bg-dark: #0A0B0BE3;
   --clr-muted-bg-light: #d9d9d95b;
+  --clr-muted-bg-gray-light: #f2f2f2;
   --clr-muted-bg-light-hover: #d9d9d95b;
   --clr-muted-bg-dark: #CDCDCD70;
   --clr-bg-dark-mode: #111212;
@@ -274,6 +275,7 @@ button {
 .theme-icon,
 .units-icon {
   width: 1.6rem;
+  height: 1.6rem;
 }
 
 .theme-btn, 
@@ -509,11 +511,10 @@ button {
 .hourly-icon,
 .daily-icon {
   width: 1.8rem;
-}
-
-.hourly-icon,
-.daily-icon {
   height: 1.8rem;
+  background: var(--clr-muted-bg-gray-light);
+  border-radius: 20%;
+  padding: .1rem;
 }
 
 .hourly-temp,
@@ -574,9 +575,10 @@ img {
   --clr-bg-dark: #FFFFFF;
   --clr-bg-dark-mode: #111212;
 
-  --clr-muted-bg-light: #7b7a7a5b;
+  --clr-muted-bg-light: #484848;
   --clr-muted-bg-dark: #CDCDCD70;
-  
+  --clr-muted-bg-gray-light: #c0c0c087;
+
   --clr-txt-light: #FFFFFF;
   --clr-txt-dark: #FFFFFF;
   --clr-txt-muted: #ffffffc5;
