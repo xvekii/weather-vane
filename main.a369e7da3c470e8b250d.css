@@ -254,7 +254,7 @@ button {
   overflow-x: hidden;
   z-index: 4;
   gap: .2rem;
-  transition: opacity 100ms, visibility 100ms;
+  transition: visibility 100ms;
 }
 
 .settings-menu.active {
@@ -710,4 +710,4 @@ body.dark * {
   }
 }
 
-/*# sourceMappingURL=main.14e25792b116e2cb10c8.css.map*/
+/*# sourceMappingURL=main.a369e7da3c470e8b250d.css.map*/
