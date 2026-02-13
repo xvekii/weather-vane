@@ -286,10 +286,10 @@ export function showLocations({ locations, locationsDiv, form }) {
 }
 
 export function setWeatherIcon({ iconName, iconRef, iconCont }) {
+  iconCont.appendChild(iconRef);
   import(`./assets/images/${iconName}.svg`)
     .then((images) => {
       iconRef.src = images.default;
-      iconCont.appendChild(iconRef);
     });
 }
 
