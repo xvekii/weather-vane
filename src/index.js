@@ -43,12 +43,12 @@ const unitsIcon = createImg({ classes: ["units-icon"] });
 const defaultLoc = "Shanghai, China";
 
 
-let darkmode = localStorage.getItem("darkmode") || "inactive";
+const darkmode = localStorage.getItem("darkmode") || "inactive";
 if (darkmode === "active") {
   enableDarkmode(themeBtn);
 }
 
-let units = localStorage.getItem("units") || "metric";
+const units = localStorage.getItem("units") || "metric";
 unitsBtn.dataset.units = units;
 
 handleGetWeather(
@@ -93,11 +93,12 @@ locationsDiv.addEventListener("click", (e) => {
 });
 
 settingsMenuBtn.addEventListener("click", () => {
-  if (darkmode === "active") {
-    themeBtn.textContent = "Dark theme";
+  const activeDarkmode = localStorage.getItem("darkmode");
+  if (activeDarkmode === "active") {
+    themeBtn.textContent = "Dark mode";
     setWeatherIcon({ iconName: "dark-mode", iconRef: themeIcon, iconCont: themeBtn });
   } else {
-    themeBtn.textContent = "Light theme";
+    themeBtn.textContent = "Light mode";
     setWeatherIcon({ iconName: "light-mode", iconRef: themeIcon, iconCont: themeBtn });
   }
 
@@ -120,20 +121,21 @@ settingsMenu.addEventListener("click", (e) => {
   const clicked = e.target;
 
   if (clicked.closest(".theme-btn")) {
-    darkmode = localStorage.getItem("darkmode");
-    darkmode !== "active" ? enableDarkmode(themeBtn) : disableDarkmode(themeBtn);
+    const activeDarkmode = localStorage.getItem("darkmode");
+    activeDarkmode !== "active" ? enableDarkmode(themeBtn) : disableDarkmode(themeBtn);
   }
 
   if (clicked.closest(".units-btn")) {
     let unitsBtnCurrAttr = unitsBtn.dataset.units;
-    
+    let currUnits = "";
+
     if (unitsBtnCurrAttr === "us") {
-      units = "metric"; 
-      unitsBtn.dataset.units = "metric";
+      currUnits = "metric"; 
+      unitsBtn.dataset.units = currUnits;
       unitsBtnTxt.textContent = METRIC;
-      localStorage.setItem("units", "metric");
+      localStorage.setItem("units", currUnits);
     } else {
-      units = "us";
+      currUnits = "us";
       unitsBtn.dataset.units = "us";
       unitsBtnTxt.textContent = IMPERIAL;
       localStorage.setItem("units", "us");
@@ -141,7 +143,7 @@ settingsMenu.addEventListener("click", (e) => {
   
     handleGetWeather(
       localStorage.getItem("lastLocation") || defaultLoc,
-      units
+      currUnits
     );
   }
 });
