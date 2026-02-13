@@ -39,13 +39,13 @@ A weather application with location search, hourly and daily forecasts, and cust
 ## Screenshots
 
 ### Desktop view, light mode
-<img alt="dt1" src="https://github.com/user-attachments/assets/cf359318-6c4d-4c38-9aaf-8db3bbe5da05" />
+<img alt="dt1" src="https://github.com/user-attachments/assets/58daa5fd-c0d6-4458-864c-21a3111d1aa4"  />
 
 ### Desktop view, dark mode
-<img alt="dt2dm" src="https://github.com/user-attachments/assets/aefcba30-0ada-49f2-a340-b0e636fddabd" />
+<img alt="dt2dm" src="https://github.com/user-attachments/assets/ebcf693a-1759-434f-8648-763c7900005d" />
 
 ### Mobile view, light and dark mode
 <p align="center">
-  <img alt="m1" src="https://github.com/user-attachments/assets/a477dcb2-28cb-4569-80c0-08f6361f9441" width="300" style="margin:10px 20px;" />
-  <img alt="m2dm" src="https://github.com/user-attachments/assets/d4b57bd9-1a68-4d6d-aa81-8a5b670b49da" width="300" style="margin:10px 20px;" />
+  <img alt="m1" src="https://github.com/user-attachments/assets/5a0c94c1-091a-470f-a4a9-4338579eae25" width="300" style="margin:10px 20px;" />
+  <img alt="m2dm" src="https://github.com/user-attachments/assets/01e5f3e9-9140-43c4-a156-5fec31cebd42" width="300" style="margin:10px 20px;" />
 </p>
