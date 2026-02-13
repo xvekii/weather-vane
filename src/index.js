@@ -48,7 +48,7 @@ if (darkmode === "active") {
   enableDarkmode(themeBtn);
 }
 
-const units = localStorage.getItem("units") || "metric";
+let units = localStorage.getItem("units") || "metric";
 unitsBtn.dataset.units = units;
 
 handleGetWeather(
@@ -104,10 +104,10 @@ settingsMenuBtn.addEventListener("click", () => {
 
   // Get units from LS
   // Set attr 
-  const currUnits = localStorage.getItem("units") || "metric";
-  unitsBtn.dataset.units = currUnits;
+  units = localStorage.getItem("units") || "metric";
+  unitsBtn.dataset.units = units;
 
-  if (currUnits === "us") {
+  if (units === "us") {
     unitsBtnTxt.textContent = IMPERIAL;
   } else {
     unitsBtnTxt.textContent = METRIC;
@@ -127,15 +127,14 @@ settingsMenu.addEventListener("click", (e) => {
 
   if (clicked.closest(".units-btn")) {
     let unitsBtnCurrAttr = unitsBtn.dataset.units;
-    let currUnits = "";
 
     if (unitsBtnCurrAttr === "us") {
-      currUnits = "metric"; 
-      unitsBtn.dataset.units = currUnits;
+      units = "metric"; 
+      unitsBtn.dataset.units = units;
       unitsBtnTxt.textContent = METRIC;
-      localStorage.setItem("units", currUnits);
+      localStorage.setItem("units", units);
     } else {
-      currUnits = "us";
+      units = "us";
       unitsBtn.dataset.units = "us";
       unitsBtnTxt.textContent = IMPERIAL;
       localStorage.setItem("units", "us");
@@ -143,7 +142,7 @@ settingsMenu.addEventListener("click", (e) => {
   
     handleGetWeather(
       localStorage.getItem("lastLocation") || defaultLoc,
-      currUnits
+      units
     );
   }
 });
